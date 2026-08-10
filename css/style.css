@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
+}
+
+.navbar {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8%;
+    border-bottom: 1px solid #292929;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.hero {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.small-text {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #888888;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 72px;
+    margin-bottom: 15px;
+}
+
+.tagline {
+    font-size: 22px;
+    color: #aaaaaa;
+    margin-bottom: 35px;
+}
+
+#startButton {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    color: black;
+}
+
+#startButton:hover {
+    transform: translateY(-2px);
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 60px 8%;
+}
+
+.feature-card {
+    width: 280px;
+    padding: 30px;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    background: #171717;
+}
+
+.feature-card h2 {
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #999999;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #666666;
+}
