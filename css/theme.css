@@ -1,0 +1,68 @@
+:root {
+  /* Color Palette - Dark Default */
+  --bg-primary: #0a0714;
+  --bg-secondary: rgba(18, 14, 34, 0.7);
+  --bg-tertiary: rgba(255, 255, 255, 0.03);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-purple: #8b5cf6;
+  --accent-violet: #6d28d9;
+  --accent-glow: rgba(139, 92, 246, 0.4);
+  --accent-pink: #ec4899;
+  --accent-orange: #f97316;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(15, 11, 28, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(139, 92, 246, 0.3);
+  --glass-blur: 16px;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  
+  /* Layout & Utility */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  --navbar-height: 72px;
+
+  /* Additional Bento & Section Tokens */
+  --glow-subtle: rgba(139, 92, 246, 0.15);
+  --line-glow: rgba(139, 92, 246, 0.5);
+  --bento-glow-top: rgba(236, 72, 153, 0.15);
+}
+
+[data-theme="light"] {
+  --bg-primary: #faf9fe;
+  --bg-secondary: rgba(255, 255, 255, 0.8);
+  --bg-tertiary: rgba(0, 0, 0, 0.03);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --accent-purple: #7c3aed;
+  --accent-violet: #5b21b6;
+  --accent-glow: rgba(124, 58, 237, 0.2);
+  
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(124, 58, 237, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.08);
+
+  /* Light Theme Section Overrides */
+  --glow-subtle: rgba(124, 58, 237, 0.08);
+  --line-glow: rgba(124, 58, 237, 0.4);
+  --bento-glow-top: rgba(236, 72, 153, 0.1);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
