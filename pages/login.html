@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — AreWeCooked?</title>
+  
+  <!-- CSS Assets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+  <!-- Background Lighting & Trackers -->
+  <div class="mouse-glow" id="mouseGlow"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Top Controls -->
+  <div class="auth-top-controls">
+    <a href="../index.html" class="back-link">← Back to Home</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
+  </div>
+
+  <!-- Main Auth Container -->
+  <main class="auth-container">
+    <div class="auth-card glass-panel reveal-on-scroll is-visible">
+      
+      <!-- Header / Branding -->
+      <div class="auth-header">
+        <a href="../index.html" class="nav-brand text-center">
+          AreWe<span>Cooked?</span>
+        </a>
+        <h1 class="auth-title">Welcome back.</h1>
+        <p class="auth-subtitle">Ready to get back to cooking?</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form" novalidate>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="name@domain.com" required>
+          <span class="error-msg" id="emailError">Please enter a valid email address.</span>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <div class="input-password-wrapper">
+            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+            <button type="button" class="toggle-password-btn" id="toggleLoginPassword" aria-label="Toggle password visibility">👁️</button>
+          </div>
+          <span class="error-msg" id="passwordError">Password is required.</span>
+        </div>
+
+        <!-- Form Utilities -->
+        <div class="form-utilities">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary auth-submit-btn">Login</button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <!-- Google OAuth UI Button -->
+      <button type="button" class="btn-google" id="googleAuthBtn">
+        <svg class="google-icon" width="18" height="18" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <!-- Footer Link -->
+      <div class="auth-footer-text">
+        Don't have an account? <a href="signup.html">Sign up</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- JS Assets -->
+  <script src="../js/theme.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>
