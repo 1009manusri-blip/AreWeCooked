@@ -1,0 +1,938 @@
+/* =========================================================
+   AREWECOOKED? — ROADMAP PAGE
+   Roadmap-specific styles only
+   ========================================================= */
+
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(103, 45, 190, 0.32),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(219, 38, 119, 0.22),
+            transparent 30%
+        ),
+        #08070d;
+
+    color: #f5f3ff;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+/* =========================================================
+   FLOATING NAVBAR
+   ========================================================= */
+
+.navbar-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  transition: transform var(--transition-smooth), top var(--transition-smooth);
+}
+
+.navbar {
+  width: 100%;
+  max-width: 1140px;
+  height: var(--navbar-height);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  transition:
+    padding var(--transition-smooth),
+    height var(--transition-smooth),
+    border-color var(--transition-fast);
+}
+
+.navbar-wrapper.scrolled .navbar {
+  height: 60px;
+  border-color: var(--glass-border-hover);
+}
+
+.nav-brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-brand span {
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-pink)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.938rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background: var(--accent-purple);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--accent-purple);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  border-color: var(--glass-border-hover);
+}
+
+.btn-secondary {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-violet)
+  );
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.938rem;
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 20px var(--accent-glow);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px var(--accent-glow);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* =========================================================
+   ROADMAP PAGE
+   ========================================================= */
+
+.roadmap-page {
+    width: min(1000px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding:
+        75px 0
+        100px;
+}
+
+
+/* =========================================================
+   ROADMAP HEADER
+   ========================================================= */
+
+.roadmap-header {
+    text-align: center;
+
+    max-width: 760px;
+
+    margin: 0 auto 58px;
+}
+
+
+/* SMALL PREMIUM LABEL */
+
+.roadmap-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 15px;
+margin-top: 30px;
+    margin-bottom: 18px;
+
+    border-radius: 30px;
+
+    border: 1px solid rgba(168, 85, 247, 0.22);
+
+    background: rgba(168, 85, 247, 0.06);
+
+    color: #b98cff;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* SMALLER ROADMAP HEADING */
+
+.roadmap-title {
+    font-size: clamp(42px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2.5px;
+
+    font-weight: 850;
+
+    color: #f8f7ff;
+
+    margin-bottom: 16px;
+}
+
+
+/* DESCRIPTION */
+
+.roadmap-description {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #a9a4ba;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ROADMAP LIST
+   ========================================================= */
+
+.roadmap-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   ROADMAP CARD
+   ========================================================= */
+
+.roadmap-item {
+    width: 100%;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.075);
+
+    background:
+        rgba(18, 14, 30, 0.78);
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.roadmap-item:hover {
+    border-color: rgba(168, 85, 247, 0.25);
+
+    background:
+        rgba(22, 17, 37, 0.9);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+
+/* OPEN CARD */
+
+.roadmap-item.open {
+    border-color: rgba(139, 92, 246, 0.38);
+
+    box-shadow:
+        0 15px 40px rgba(88, 28, 135, 0.12);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.roadmap-card-header {
+    width: 100%;
+
+    min-height: 88px;
+
+    padding: 18px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    border: none;
+
+    background: transparent;
+
+    color: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-family: inherit;
+}
+
+
+/* NUMBER */
+
+.roadmap-number {
+    min-width: 48px;
+
+    color: #985cff;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* INFO */
+
+.roadmap-card-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* TITLE */
+
+.roadmap-card-title {
+    color: #f4f1ff;
+
+    font-size: 18px;
+
+    font-weight: 750;
+
+    line-height: 1.35;
+}
+
+
+/* META */
+
+.roadmap-card-meta {
+    color: #8f8a9f;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.roadmap-arrow {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #aaa4bb;
+
+    font-size: 18px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    transition:
+        transform 0.35s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.roadmap-card-header:hover .roadmap-arrow {
+    color: #c9a8ff;
+
+    background: rgba(168, 85, 247, 0.08);
+}
+
+
+/* ROTATE WHEN OPEN */
+
+.roadmap-item.open .roadmap-arrow {
+    transform: rotate(180deg);
+
+    color: #b47cff;
+
+    background: rgba(168, 85, 247, 0.1);
+}
+
+
+/* =========================================================
+   SUBTOPIC DROPDOWN
+   ========================================================= */
+
+.roadmap-content {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    transition:
+        grid-template-rows 0.4s ease;
+}
+
+.roadmap-item.open .roadmap-content {
+    grid-template-rows: 1fr;
+}
+
+.roadmap-content-inner {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SUBTOPIC AREA
+   ========================================================= */
+
+.subtopic-list {
+    margin: 0 24px 24px 94px;
+
+    padding: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    border-left: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+
+/* =========================================================
+   SUBTOPIC
+   ========================================================= */
+
+.subtopic {
+    position: relative;
+
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(255, 255, 255, 0.045);
+
+    color: #aaa5b7;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* LITTLE DOT */
+
+.subtopic::before {
+    content: "";
+
+    position: absolute;
+
+    left: -25px;
+
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #8b5cf6;
+
+    box-shadow:
+        0 0 8px rgba(139, 92, 246, 0.55);
+}
+
+
+.subtopic:hover {
+    color: #e5dfff;
+
+    background:
+        rgba(139, 92, 246, 0.07);
+
+    border-color:
+        rgba(139, 92, 246, 0.18);
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #08070d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.45);
+
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.7);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        width: calc(100% - 30px);
+
+        padding: 0 20px;
+
+        gap: 18px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .nav-actions {
+        gap: 12px;
+    }
+
+    .roadmap-page {
+        width: calc(100% - 30px);
+
+        padding-top: 60px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        min-height: auto;
+
+        padding: 16px;
+
+        border-radius: 24px;
+
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .nav-links {
+        order: 3;
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-top: 5px;
+
+        gap: 24px;
+    }
+
+    .nav-links a {
+        white-space: nowrap;
+    }
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+    .login-link {
+        display: none;
+    }
+
+    .signup-btn {
+        padding: 10px 16px;
+
+        font-size: 14px;
+    }
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    /* HEADER */
+
+    .roadmap-page {
+        width: calc(100% - 24px);
+
+        padding:
+            45px 0
+            70px;
+    }
+
+    .roadmap-header {
+        margin-bottom: 40px;
+    }
+
+    .roadmap-title {
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+    .roadmap-description {
+        font-size: 15px;
+    }
+
+
+    /* CARDS */
+
+    .roadmap-card-header {
+        min-height: 78px;
+
+        padding: 16px;
+
+        gap: 13px;
+    }
+
+    .roadmap-number {
+        min-width: 34px;
+
+        font-size: 17px;
+    }
+
+    .roadmap-card-title {
+        font-size: 15px;
+    }
+
+    .roadmap-card-meta {
+        font-size: 12px;
+    }
+
+    .roadmap-arrow {
+        width: 34px;
+        height: 34px;
+    }
+
+
+    /* SUBTOPICS */
+
+    .subtopic-list {
+        margin:
+            0 16px
+            18px 63px;
+
+        padding: 14px;
+    }
+
+    .subtopic {
+        padding: 12px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .navbar {
+        width: calc(100% - 18px);
+
+        margin-top: 10px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+
+    .signup-btn {
+        padding: 9px 13px;
+    }
+
+    .roadmap-title {
+        font-size: 36px;
+    }
+
+    .roadmap-card-header {
+        padding: 14px;
+    }
+
+    .roadmap-card-meta {
+        display: none;
+    }
+
+    .subtopic-list {
+        margin-left: 52px;
+    }
+
+}
+
+/* =========================================================
+   LIGHT MODE
+   Uses the SAME data-theme system as theme.js
+   ========================================================= */
+
+html[data-theme="light"] body {
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(168, 85, 247, 0.10),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(236, 72, 153, 0.08),
+            transparent 30%
+        ),
+        #f8f7fc;
+
+    color: #17151f;
+}
+
+
+html[data-theme="light"] .roadmap-item {
+    background: rgba(255, 255, 255, 0.82);
+
+    border-color: rgba(40, 30, 60, 0.09);
+
+    box-shadow:
+        0 8px 30px rgba(40, 30, 60, 0.05);
+}
+
+
+html[data-theme="light"] .roadmap-item:hover {
+    background: rgba(255, 255, 255, 0.96);
+
+    border-color: rgba(139, 92, 246, 0.25);
+
+    box-shadow:
+        0 12px 35px rgba(40, 30, 60, 0.08);
+}
+
+
+html[data-theme="light"] .roadmap-card-title {
+    color: #211c2d;
+}
+
+
+html[data-theme="light"] .roadmap-card-meta {
+    color: #777083;
+}
+
+
+html[data-theme="light"] .roadmap-description {
+    color: #6f687b;
+}
+
+
+html[data-theme="light"] .roadmap-eyebrow {
+    background: rgba(139, 92, 246, 0.07);
+
+    border-color: rgba(139, 92, 246, 0.18);
+
+    color: #7746c4;
+}
+
+
+html[data-theme="light"] .roadmap-arrow {
+    color: #71697c;
+
+    background: rgba(40, 30, 60, 0.035);
+
+    border-color: rgba(40, 30, 60, 0.08);
+}
+
+
+html[data-theme="light"] .subtopic {
+    color: #686172;
+
+    background: rgba(40, 30, 60, 0.025);
+
+    border-color: rgba(40, 30, 60, 0.07);
+}
+
+
+html[data-theme="light"] .subtopic:hover {
+    color: #3d344c;
+
+    background: rgba(139, 92, 246, 0.06);
+
+    border-color: rgba(139, 92, 246, 0.18);
+}
