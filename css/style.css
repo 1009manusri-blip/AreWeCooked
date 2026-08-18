@@ -256,6 +256,7 @@ body {
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 28px;
+
 }
 
 .hero-badge .dot {
@@ -288,7 +289,7 @@ body {
 }
 
 .hero-subtitle {
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: clamp(1rem, 2vw, 2.5rem);
   font-weight: 800;
   color: var(--accent-pink);
   margin-bottom: 24px;
@@ -300,7 +301,7 @@ body {
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--text-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .hero-cta {
@@ -535,7 +536,7 @@ body {
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.9rem, 2.3vw, 1.8rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -713,7 +714,7 @@ body {
 
 .bento-desc {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.83rem;
   line-height: 1.5;
   max-width: 440px;
 }
@@ -842,14 +843,15 @@ body {
 }
 
 .cta-title {
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(1.5rem, 3.7vw, 2.9rem);
   font-weight: 900;
   letter-spacing: -0.03em;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .cta-subtitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 36px;
 }

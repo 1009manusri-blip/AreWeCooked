@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AreWeCooked? — Learn the Basics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #080b14;
+      --card-bg: rgba(255, 255, 255, 0.035);
+      --card-bg-hover: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(100, 140, 255, 0.3);
+
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.25);
+      --accent-green: #10b981;
+
+      --text-main: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+
+      --blur-val: blur(18px);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.09), transparent 35%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem 4rem;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================= */
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: var(--transition);
+    }
+
+    .home-link:hover {
+      color: var(--text-main);
+      transform: translateX(-2px);
+    }
+
+    .home-arrow {
+      color: var(--accent-blue);
+      font-size: 1rem;
+      transition: transform 0.25s ease;
+    }
+
+    .home-link:hover .home-arrow {
+      transform: translateX(-3px);
+    }
+
+    .home-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0 0.75rem;
+    }
+
+    .page-brand {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-badge {
+      margin-left: 0.45rem;
+      font-size: 0.6rem;
+      padding: 3px 7px;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      color: #60a5fa;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header-section {
+      margin-bottom: 2rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .main-heading {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      margin-bottom: 0.55rem;
+    }
+
+    .header-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: 590px;
+      line-height: 1.55;
+    }
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .progress-container {
+      margin-bottom: 2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: var(--blur-val);
+      -webkit-backdrop-filter: var(--blur-val);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .progress-count {
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* =========================
+       SECTION HEADER
+    ========================= */
+
+    .section-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.25rem;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .section-description {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      max-width: 500px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       CAROUSEL
+    ========================= */
+
+    .carousel-track {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 0.25rem 0.25rem 1rem;
+      margin: 0 -0.25rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+    }
+
+    .carousel-track:active {
+      cursor: grabbing;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card {
+      flex: 0 0 calc(33.333% - 0.85rem);
+      min-width: 300px;
+      min-height: 330px;
+      scroll-snap-align: start;
+
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: var(--blur-val);
+      -webkit-backdrop-filter: var(--blur-val);
+      border-radius: var(--radius-lg);
+
+      padding: 1.25rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      top: -70px;
+      right: -60px;
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 50%;
+      filter: blur(20px);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-border-hover);
+      background: var(--card-bg-hover);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 20px var(--accent-blue-glow);
+    }
+
+    .card.is-learned {
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .topic-number {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .ai-badge {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.1);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.22);
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-main);
+      margin-bottom: 0.55rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .tags-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag {
+      font-size: 0.63rem;
+      padding: 3px 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #fff;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-secondary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    /* =========================
+       LEARNED TOGGLE
+    ========================= */
+
+    .learned-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+      padding-top: 0.65rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .learned-toggle input {
+      display: none;
+    }
+
+    .checkbox-custom {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .learned-toggle input:checked ~ .checkbox-custom {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .checkbox-custom::after {
+      content: "";
+      width: 4px;
+      height: 7px;
+      border: solid #000;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(45deg);
+      display: none;
+      margin-bottom: 1px;
+    }
+
+    .learned-toggle input:checked ~ .checkbox-custom::after {
+      display: block;
+    }
+
+    .learned-toggle input:checked ~ .label-text {
+      color: var(--accent-green);
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+
+      background: rgba(4, 6, 12, 0.78);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: rgba(15, 20, 32, 0.9);
+      border: 1px solid var(--card-border);
+      backdrop-filter: var(--blur-val);
+      -webkit-backdrop-filter: var(--blur-val);
+      border-radius: var(--radius-lg);
+
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+
+      padding: 1.5rem;
+
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+
+      transform: scale(0.96) translateY(8px);
+      transition: transform 0.25s ease;
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .modal-topic-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .prompt-box-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      min-height: 0;
+    }
+
+    .prompt-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .prompt-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+
+      max-height: 50vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .prompt-box::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .prompt-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      color: var(--text-main);
+
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-md);
+
+      font-size: 0.78rem;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+
+      z-index: 1100;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .card {
+        flex: 0 0 calc(50% - 0.625rem);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1.5rem 1rem 3rem;
+      }
+
+      .top-bar {
+        margin-bottom: 2rem;
+      }
+
+      .main-heading {
+        font-size: 1.45rem;
+      }
+
+      .header-desc {
+        font-size: 0.85rem;
+      }
+
+      .section-controls {
+        align-items: flex-start;
+      }
+
+      .section-description {
+        max-width: 300px;
+      }
+
+      .card {
+        flex: 0 0 86%;
+        min-width: 0;
+        min-height: 315px;
+      }
+
+      .modal {
+        padding: 1.15rem;
+        max-height: 92vh;
+      }
+
+      .prompt-box {
+        max-height: 55vh;
+        font-size: 0.77rem;
+      }
+
+      .toast {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        justify-content: center;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+```
+<!-- =========================
+     TOP BAR
+========================== -->
+
+<div class="top-bar">
+
+  <a href="../../index.html" class="home-link" aria-label="Go to homepage">
+    <span class="home-arrow">←</span>
+    <span>Home</span>
+  </a>
+
+  <span class="home-divider"></span>
+
+  <div class="page-brand">
+    AreWeCooked?
+    <span class="brand-badge">DSA Roadmap</span>
+  </div>
+
+</div>
+
+<!-- =========================
+     HEADER
+========================== -->
+
+<header class="header-section">
+
+  <div class="eyebrow">Module 1.1</div>
+
+  <h1 class="main-heading">Learn the Basics</h1>
+
+  <p class="header-desc">
+    Learn each topic with AI in your own language, then come back here and prove it by solving.
+  </p>
+
+</header>
+
+<!-- =========================
+     PROGRESS
+========================== -->
+
+<div class="progress-container">
+
+  <div class="progress-header">
+    <span>Your Progress</span>
+
+    <span class="progress-count" id="progress-text">
+      0 / 7 Topics Completed
+    </span>
+  </div>
+
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+
+</div>
+
+<!-- =========================
+     AI SECTION
+========================== -->
+
+<div class="section-controls">
+
+  <div>
+
+    <div class="eyebrow">
+      Interactive Learning
+    </div>
+
+    <h2 class="section-title">
+      Learn with AI
+    </h2>
+
+    <p class="section-description">
+      Pick a topic, copy the prompt, and let AI teach you interactively.
+    </p>
+
+  </div>
+
+  <div class="nav-buttons">
+
+    <button
+      class="nav-btn"
+      id="prevBtn"
+      aria-label="Previous topics"
+      type="button"
+    >
+      ←
+    </button>
+
+    <button
+      class="nav-btn"
+      id="nextBtn"
+      aria-label="Next topics"
+      type="button"
+    >
+      →
+    </button>
+
+  </div>
+
+</div>
+
+<!-- =========================
+     CAROUSEL
+========================== -->
+
+<div class="carousel-track" id="carouselTrack">
+
+  <!-- CARD 01 -->
+  <div class="card" data-id="1">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">01</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Language Basics
+      </h3>
+
+      <p class="card-desc">
+        Build the programming foundation you actually need before starting DSA.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">C++</span>
+        <span class="tag">Java</span>
+        <span class="tag">Python</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(1)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(1)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="1"
+          onchange="toggleLearned(1, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 02 -->
+  <div class="card" data-id="2">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">02</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Build-up Logical Thinking
+      </h3>
+
+      <p class="card-desc">
+        Learn how to turn a problem statement into logic before writing code.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">Logic</span>
+        <span class="tag">Problem Solving</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(2)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(2)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="2"
+          onchange="toggleLearned(2, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 03 -->
+  <div class="card" data-id="3">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">03</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Patterns
+      </h3>
+
+      <p class="card-desc">
+        Understand rows, columns and nested loops instead of memorising patterns.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">Loops</span>
+        <span class="tag">Nested Loops</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(3)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(3)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="3"
+          onchange="toggleLearned(3, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 04 -->
+  <div class="card" data-id="4">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">04</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        STL / Collections
+      </h3>
+
+      <p class="card-desc">
+        Learn the data structures and tools your language gives you for DSA.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">STL</span>
+        <span class="tag">Collections</span>
+        <span class="tag">DSA</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(4)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(4)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="4"
+          onchange="toggleLearned(4, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 05 -->
+  <div class="card" data-id="5">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">05</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Basic Maths
+      </h3>
+
+      <p class="card-desc">
+        Build the mathematical thinking behind common beginner DSA problems.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">Numbers</span>
+        <span class="tag">Primes</span>
+        <span class="tag">GCD</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(5)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(5)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="5"
+          onchange="toggleLearned(5, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 06 -->
+  <div class="card" data-id="6">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">06</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Basic Recursion
+      </h3>
+
+      <p class="card-desc">
+        Understand calls, base cases and the stack before solving recursion problems.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">Recursion</span>
+        <span class="tag">Call Stack</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(6)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(6)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="6"
+          onchange="toggleLearned(6, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARD 07 -->
+  <div class="card" data-id="7">
+
+    <div>
+
+      <div class="card-top">
+        <span class="topic-number">07</span>
+        <span class="ai-badge">AI Learn</span>
+      </div>
+
+      <h3 class="card-title">
+        Basic Hashing
+      </h3>
+
+      <p class="card-desc">
+        Learn when storing information can make a problem dramatically faster.
+      </p>
+
+      <div class="tags-wrapper">
+        <span class="tag">Hashing</span>
+        <span class="tag">Frequency</span>
+        <span class="tag">Lookup</span>
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openModal(7)"
+          type="button"
+        >
+          View Prompt
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          onclick="copyPrompt(7)"
+          type="button"
+        >
+          Copy
+        </button>
+
+      </div>
+
+      <label class="learned-toggle">
+
+        <input
+          type="checkbox"
+          data-learned-id="7"
+          onchange="toggleLearned(7, this.checked)"
+        >
+
+        <span class="checkbox-custom"></span>
+
+        <span class="label-text">
+          Mark as learned
+        </span>
+
+      </label>
+
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- =========================
+       PROMPT MODAL
+  ========================== -->
+
+  <div
+    class="modal-overlay"
+    id="modalOverlay"
+    onclick="closeModalOnOuterClick(event)"
+    aria-hidden="true"
+  >
+
+```
+<div
+  class="modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalTitle"
+>
+
+  <div class="modal-header">
+
+    <div>
+
+      <div
+        class="modal-topic-label"
+        id="modalTopicLabel"
+      >
+        Topic 01
+      </div>
+
+      <div
+        class="modal-title"
+        id="modalTitle"
+      >
+        Language Basics
+      </div>
+
+    </div>
+
+    <button
+      class="modal-close"
+      onclick="closeModal()"
+      aria-label="Close prompt"
+      type="button"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="prompt-box-wrapper">
+
+    <span class="prompt-label">
+      AI Prompt
+    </span>
+
+    <div
+      class="prompt-box"
+      id="modalPromptText"
+    >
+      Loading prompt...
+    </div>
+
+  </div>
+
+
+  <div class="modal-actions">
+
+    <button
+      class="btn btn-secondary"
+      onclick="closeModal()"
+      type="button"
+    >
+      Close
+    </button>
+
+    <button
+      class="btn btn-primary"
+      id="modalCopyBtn"
+      onclick="copyCurrentModalPrompt()"
+      type="button"
+    >
+      Copy Prompt
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  >
+
+```
+<span>✓</span>
+
+<span id="toastMsg">
+  Prompt copied to clipboard!
+</span>
+```
+
+  </div>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /* ============================================================
+       AI PROMPTS
+    ============================================================ */
+
+    const promptsData = {
+
+      1: {
+        title: "Language Basics",
+
+        prompt: `Act as my personal programming fundamentals tutor for DSA.
+
+First ask me which language I am using:
+- C++
+- Java
+- Python
+
+Also ask me how much programming I already know.
+
+My goal is NOT to master the entire programming language. I want to learn the programming fundamentals I actually need before starting DSA and become comfortable solving basic problems independently.
+
+Teach me interactively, not like a textbook.
+
+Start by checking my current level with a few simple questions or a tiny coding task. Then create a learning path based on my level.
+
+Teach ONE concept at a time.
+
+For every concept:
+
+1. Explain the idea simply.
+2. Show a small example in my chosen language.
+3. Explain why the code works.
+4. Ask me a question to check my understanding.
+5. Give me a small problem to solve myself.
+6. Let me attempt it before showing the solution.
+7. If I get stuck, give hints progressively.
+8. If my solution is wrong, help me identify and fix the mistake instead of immediately replacing my code.
+9. Explain important edge cases.
+10. Move on only when I reasonably understand the concept.
+
+Cover the programming fundamentals needed for beginner DSA:
+
+- Variables
+- Data types
+- Input/output
+- Operators
+- Type conversion where relevant
+- if/else
+- switch where relevant
+- for loops
+- while loops
+- nested loops
+- functions
+- parameters and return values
+- basic scope
+- arrays/lists
+- strings
+- basic language features needed for problem solving
+
+Adapt EVERYTHING to my chosen language.
+
+Connect each concept to DSA. Explain how loops, conditions, functions, arrays/lists and strings will later appear in actual DSA problems.
+
+Do not make me memorize syntax. Make me think.
+
+Gradually introduce:
+
+- problem understanding
+- writing simple logic
+- pseudocode
+- dry runs
+- edge cases
+- debugging
+- basic time complexity
+- basic space complexity
+
+When I give you code, first understand what I was trying to do. Then point out the exact issue, explain WHY it happens, and give me a hint before giving corrected code.
+
+Periodically test me with:
+
+- output prediction
+- debugging
+- dry runs
+- small coding problems
+- "what would you change?" questions
+
+Do not give huge theory dumps.
+Do not reveal solutions immediately.
+Do not rush.
+Adapt the difficulty to me.
+
+At the end, give me a small assessment and tell me which fundamentals I should revise before moving to DSA.
+
+Start by asking me which language I use and what I already know.`
+      },
+
+
+      2: {
+        title: "Build-up Logical Thinking",
+
+        prompt: `Act as my personal problem-solving tutor for DSA.
+
+I want to develop the ability to look at a programming problem and figure out the logic myself instead of immediately searching for a solution.
+
+First ask me whether I use C++, Java, or Python and remember my choice throughout the session.
+
+Do NOT teach this like a theory chapter.
+
+Teach me how to think.
+
+Start with very simple problems and gradually increase the difficulty.
+
+For every problem, train me through this process:
+
+1. Read the problem carefully.
+2. Identify what is given.
+3. Identify what needs to be found.
+4. Identify important constraints if provided.
+5. Break the problem into smaller steps.
+6. Look for patterns or observations.
+7. Decide which programming concepts are needed.
+8. Write the logic/pseudocode.
+9. Dry-run the logic manually.
+10. Convert it into code.
+11. Test normal and edge cases.
+12. Think about time and space complexity.
+
+Do NOT give me the solution immediately.
+
+Ask me what I think first.
+
+If I am stuck:
+
+- give a small hint
+- then a stronger hint
+- only reveal the approach if I still cannot progress
+
+After I solve a problem, ask me whether there is another way to solve it and compare the approaches.
+
+Include exercises involving:
+
+- conditions
+- loops
+- nested loops
+- numbers
+- arrays/lists
+- strings
+- simple patterns
+- basic mathematical logic
+
+Teach me to recognise common problem-solving patterns.
+
+Occasionally give me a problem without telling me which concept it uses. I should identify the approach myself.
+
+If I make the same mistake repeatedly, stop and teach that specific thinking gap.
+
+Do not focus on memorising code.
+
+Focus on:
+
+PROBLEM → OBSERVATION → LOGIC → APPROACH → CODE → TEST
+
+At the end, give me a mini challenge where I must explain my approach BEFORE writing code.
+
+Start by asking me a very easy problem and let me think.`
+      },
+
+
+      3: {
+        title: "Patterns",
+
+        prompt: `Act as my personal DSA patterns tutor.
+
+I use patterns to improve my understanding of nested loops and logical thinking, not to memorise pattern code.
+
+First ask me whether I use C++, Java, or Python and use that language throughout the session.
+
+Teach me patterns progressively from extremely simple to challenging.
+
+For every pattern:
+
+1. Show me the expected output.
+2. Ask me to observe it.
+3. Ask how many rows there are.
+4. Ask what changes from row to row.
+5. Make me identify the number of columns/items.
+6. Make me identify spaces if they exist.
+7. Ask me what should be printed in each position.
+8. Help me derive the loop structure.
+9. Let me attempt the code.
+10. Give hints if I get stuck.
+11. Dry-run the loops.
+12. Explain the final solution only after I have tried.
+
+Start with:
+
+- solid star patterns
+- increasing/decreasing patterns
+- number patterns
+- character patterns
+
+Then gradually introduce:
+
+- spaces
+- pyramids
+- inverted pyramids
+- symmetrical patterns
+- changing row/column relationships
+- more complex nested-loop patterns
+
+Do NOT let me memorise templates.
+
+If I ask for the code immediately, first ask me to explain the row/column logic.
+
+When I make a mistake, identify whether the problem is:
+
+- row logic
+- column logic
+- space calculation
+- loop bounds
+- printed value
+- nested-loop structure
+
+Make me predict the output of small loops and dry-run them.
+
+Gradually increase difficulty only when I demonstrate understanding.
+
+At the end, give me several unseen patterns and ask me to derive the logic without help.
+
+The goal is:
+
+OBSERVE → FIND THE PATTERN → DERIVE LOOPS → CODE → DRY RUN
+
+Start with a very simple pattern and ask me what I notice.`
+      },
+
+
+      4: {
+        title: "STL / Collections",
+
+        prompt: `Act as my personal DSA data-structures tutor.
+
+First ask me whether I use C++, Java, or Python.
+
+Adapt the entire lesson to my language.
+
+My goal is not to memorise every library function. I want to understand the data structures and tools I will actually use while solving DSA problems.
+
+Teach one structure at a time.
+
+For every structure, explain:
+
+1. What it is.
+2. Why it exists.
+3. What problem it solves.
+4. When I should use it.
+5. Important operations.
+6. Time complexity of those operations.
+7. A tiny example.
+8. A small problem where I actually use it.
+
+For C++, cover useful STL structures such as:
+
+- vector
+- pair
+- set
+- unordered_set
+- map
+- unordered_map
+- stack
+- queue
+- priority_queue
+- iterators
+- useful algorithms
+
+For Java, teach the relevant Java Collections equivalents.
+
+For Python, teach the appropriate built-in data structures and useful modules/tools for DSA.
+
+Do NOT teach every available API method.
+
+Focus on practical DSA usage.
+
+After teaching a structure, give me a problem and ask:
+
+"Would you use this structure here? Why?"
+
+Make me choose the data structure myself before telling me the answer.
+
+Include comparison questions such as:
+
+- vector vs set
+- map vs unordered_map
+- set vs unordered_set
+- stack vs queue
+- array/list vs hash-based structure
+
+Explain trade-offs and complexity when relevant.
+
+When I give code, review how I used the data structure and suggest improvements without unnecessarily rewriting my solution.
+
+Gradually move from simple usage to actual beginner DSA problems.
+
+At the end, give me a mixed challenge where I must decide which structure to use without being told.
+
+The goal is:
+
+UNDERSTAND → CHOOSE → USE → SOLVE
+
+Start by asking which language I use and what data structures I already know.`
+      },
+
+
+      5: {
+        title: "Basic Maths",
+
+        prompt: `Act as my personal Basic Maths for DSA tutor.
+
+First ask whether I use C++, Java, or Python and use that language for every coding example.
+
+Teach only the mathematics that is genuinely useful for beginner DSA and problem solving.
+
+Do not turn this into a school mathematics lecture.
+
+Teach through:
+
+OBSERVATION → LOGIC → ALGORITHM → CODE → PROBLEM
+
+Cover topics progressively, including:
+
+- even and odd numbers
+- counting digits
+- extracting digits
+- sum of digits
+- reversing a number
+- palindrome numbers
+- Armstrong numbers
+- factors
+- divisors
+- prime numbers
+- GCD
+- LCM
+- basic number properties
+
+For each topic:
+
+1. Explain the intuition.
+2. Ask me what I think the solution might be.
+3. Let me derive the logic.
+4. Use a small example.
+5. Dry-run it manually.
+6. Let me write the code.
+7. Help me debug it if necessary.
+8. Explain time and space complexity.
+9. Give me a similar problem to solve.
+
+Do not immediately give me formulas or code if I can derive the idea myself.
+
+For problems involving optimisation, first let me think of a simple solution and then help me discover a better approach.
+
+For example, when learning prime checking, don't simply give me the sqrt(N) solution. Help me understand WHY checking beyond sqrt(N) is unnecessary.
+
+Use edge cases and tricky inputs to test my understanding.
+
+At the end, give me a mixed set of beginner maths problems without telling me which technique each one requires.
+
+The goal is to make mathematical observations naturally while solving DSA problems.
+
+Start with a very simple number problem and let me explain my approach.`
+      },
+
+
+      6: {
+        title: "Basic Recursion",
+
+        prompt: `Act as my personal recursion tutor for DSA.
+
+First ask whether I use C++, Java, or Python and use that language throughout the session.
+
+Assume I may know nothing about recursion.
+
+Do NOT start with difficult recursion problems.
+
+I want to genuinely understand what recursion is rather than memorise recursive code.
+
+Teach me through small experiments and tracing.
+
+Start with:
+
+- what a function call actually does
+- what it means for a function to call itself
+- base case
+- recursive case
+- why the base case is necessary
+- how calls are placed on the call stack
+- how recursion returns and unwinds
+
+For every example:
+
+1. Show the problem.
+2. Ask me what I think should happen.
+3. Let me predict the calls.
+4. Make me manually trace them.
+5. Explain the call stack.
+6. Let me write the code.
+7. Dry-run my code.
+8. Correct my mistakes through hints.
+
+Start with extremely simple problems such as:
+
+- printing something N times
+- printing numbers
+- printing numbers in reverse
+- sum of first N numbers
+- factorial
+- basic recursive problems
+
+Do NOT rush into backtracking or advanced recursion.
+
+Teach me how to identify:
+
+- base case
+- changing parameter
+- recursive call
+- progress toward the base case
+
+Whenever possible, ask me:
+
+"What happens in the next recursive call?"
+
+and:
+
+"What happens when the base case is reached?"
+
+If I cannot trace a recursive function, stop and work on tracing before moving ahead.
+
+After I understand the basics, give me problems where I have to design the recursive logic myself.
+
+Explain time and space complexity, especially recursion stack space, once I am ready.
+
+At the end, give me several small recursive functions and ask me to predict their output and call sequence.
+
+The goal is:
+
+UNDERSTAND THE CALL → TRACE IT → DESIGN IT → CODE IT
+
+Start from absolute zero and ask me what I currently understand about recursion.`
+      },
+
+
+      7: {
+        title: "Basic Hashing",
+
+        prompt: `Act as my personal hashing tutor for DSA.
+
+First ask whether I use C++, Java, or Python and adapt all examples to my language.
+
+Do not begin by throwing map/set syntax at me.
+
+First make me understand WHY hashing is useful.
+
+Start with a simple problem where I need to repeatedly search for or count values.
+
+Let me experience the inefficient approach first.
+
+Then help me discover the idea of storing information so that I can access it quickly.
+
+Teach progressively:
+
+- lookup
+- frequency counting
+- frequency arrays
+- maps/dictionaries
+- sets
+- unordered/hash-based structures
+- when hashing is useful
+- when hashing is NOT necessary
+- time and space trade-offs
+
+For every concept:
+
+1. Give me a small problem.
+2. Let me think about a brute-force approach.
+3. Ask what makes it slow.
+4. Help me identify repeated work.
+5. Introduce hashing as a solution.
+6. Explain the intuition.
+7. Let me implement it.
+8. Dry-run it.
+9. Analyse time and space complexity.
+10. Give me a similar problem.
+
+Adapt the implementation:
+
+C++ → unordered_map, unordered_set, map, set, etc.
+
+Java → HashMap, HashSet, TreeMap, etc.
+
+Python → dict, set, Counter, etc., when appropriate.
+
+Do not teach every method.
+
+Focus on knowing WHEN and WHY to use each structure.
+
+Give me problems involving:
+
+- frequency counting
+- duplicates
+- occurrence counting
+- lookup
+- two-sum style thinking
+- basic array/list problems
+- basic string frequency problems
+
+Do not tell me "use hashing" before I have tried to identify the approach.
+
+When I solve a problem using hashing, ask whether another approach exists and compare the trade-offs.
+
+At the end, give me mixed problems where I must decide between:
+
+- brute force
+- frequency array
+- map/dictionary
+- set
+- another approach
+
+The goal is not memorising HashMap syntax.
+
+The goal is recognising:
+
+"Can I store information so I don't have to repeatedly search for it?"
+
+Start with a simple frequency-counting problem and let me think before explaining hashing.`
+      }
+
+    };
+
+
+    /* ============================================================
+       STATE
+    ============================================================ */
+
+    let activeModalId = null;
+
+    const STORAGE_KEY = "arewecooked_learn_basics_progress";
+
+    let learnedSet = new Set();
+
+
+    /* ============================================================
+       DOM
+    ============================================================ */
+
+    const track = document.getElementById("carouselTrack");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalTopicLabel = document.getElementById("modalTopicLabel");
+    const modalPromptText = document.getElementById("modalPromptText");
+
+    const progressText = document.getElementById("progress-text");
+    const progressFill = document.getElementById("progress-fill");
+
+
+    /* ============================================================
+       CAROUSEL
+    ============================================================ */
+
+    function getScrollAmount() {
+
+      const firstCard = track.querySelector(".card");
+
+      if (!firstCard) {
+        return 320;
+      }
+
+      return firstCard.offsetWidth + 20;
+    }
+
+
+    prevBtn.addEventListener("click", () => {
+
+      track.scrollBy({
+        left: -getScrollAmount(),
+        behavior: "smooth"
+      });
+
+    });
+
+
+    nextBtn.addEventListener("click", () => {
+
+      track.scrollBy({
+        left: getScrollAmount(),
+        behavior: "smooth"
+      });
+
+    });
+
+
+    /* ============================================================
+       LEARNED PROGRESS
+    ============================================================ */
+
+    function saveProgress() {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify([...learnedSet])
+      );
+
+    }
+
+
+    function loadProgress() {
+
+      try {
+
+        const saved = JSON.parse(
+          localStorage.getItem(STORAGE_KEY)
+        );
+
+        if (Array.isArray(saved)) {
+
+          learnedSet = new Set(
+            saved.map(Number)
+          );
+
+        }
+
+      } catch (error) {
+
+        learnedSet = new Set();
+
+      }
+
+      document
+        .querySelectorAll(".learned-toggle input")
+        .forEach(input => {
+
+          const id = Number(input.dataset.learnedId);
+
+          input.checked = learnedSet.has(id);
+
+          const card = document.querySelector(
+            `.card[data-id="${id}"]`
+          );
+
+          if (card && input.checked) {
+            card.classList.add("is-learned");
+          }
+
+        });
+
+      updateProgress();
+
+    }
+
+
+    function toggleLearned(id, isChecked) {
+
+      const card = document.querySelector(
+        `.card[data-id="${id}"]`
+      );
+
+      if (isChecked) {
+
+        learnedSet.add(id);
+
+        if (card) {
+          card.classList.add("is-learned");
+        }
+
+      } else {
+
+        learnedSet.delete(id);
+
+        if (card) {
+          card.classList.remove("is-learned");
+        }
+
+      }
+
+      saveProgress();
+      updateProgress();
+
+    }
+
+
+    function updateProgress() {
+
+      const total = 7;
+      const count = learnedSet.size;
+      const percentage = (count / total) * 100;
+
+      progressText.innerText =
+        `${count} / ${total} Topics Completed`;
+
+      progressFill.style.width =
+        `${percentage}%`;
+
+    }
+
+
+    /* ============================================================
+       MODAL
+    ============================================================ */
+
+    function openModal(id) {
+
+      const data = promptsData[id];
+
+      if (!data) {
+        return;
+      }
+
+      activeModalId = id;
+
+      modalTopicLabel.innerText =
+        `Topic ${String(id).padStart(2, "0")}`;
+
+      modalTitle.innerText =
+        data.title;
+
+      modalPromptText.innerText =
+        data.prompt;
+
+      modalOverlay.classList.add("active");
+
+      modalOverlay.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        modalPromptText.scrollTop = 0;
+      }, 50);
+
+    }
+
+
+    function closeModal() {
+
+      modalOverlay.classList.remove("active");
+
+      modalOverlay.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      activeModalId = null;
+
+      document.body.style.overflow = "";
+
+    }
+
+
+    function closeModalOnOuterClick(event) {
+
+      if (event.target === modalOverlay) {
+        closeModal();
+      }
+
+    }
+
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape" && activeModalId !== null) {
+        closeModal();
+      }
+
+    });
+
+
+    /* ============================================================
+       COPY PROMPTS
+    ============================================================ */
+
+    async function copyText(text) {
+
+      try {
+
+        await navigator.clipboard.writeText(text);
+
+        return true;
+
+      } catch (error) {
+
+        const textarea =
+          document.createElement("textarea");
+
+        textarea.value = text;
+
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        const successful =
+          document.execCommand("copy");
+
+        textarea.remove();
+
+        return successful;
+
+      }
+
+    }
+
+
+    async function copyPrompt(id) {
+
+      const data = promptsData[id];
+
+      if (!data) {
+        return;
+      }
+
+      const success =
+        await copyText(data.prompt);
+
+      if (success) {
+
+        showToast("Prompt copied to clipboard!");
+
+      } else {
+
+        showToast("Couldn't copy the prompt.");
+
+      }
+
+    }
+
+
+    async function copyCurrentModalPrompt() {
+
+      if (activeModalId === null) {
+        return;
+      }
+
+      await copyPrompt(activeModalId);
+
+    }
+
+
+    /* ============================================================
+       TOAST
+    ============================================================ */
+
+    let toastTimeout;
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      const toastMsg =
+        document.getElementById("toastMsg");
+
+      toastMsg.innerText = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimeout);
+
+      toastTimeout = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+      }, 2200);
+
+    }
+
+
+    /* ============================================================
+       INITIALISE
+    ============================================================ */
+
+    loadProgress();
+
+  </script>
+
+</body>
+</html>
