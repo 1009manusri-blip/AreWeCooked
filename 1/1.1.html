@@ -1,2353 +1,1680 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AreWeCooked? — Learn the Basics</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-dark: #080b14;
-      --card-bg: rgba(255, 255, 255, 0.035);
-      --card-bg-hover: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-border-hover: rgba(100, 140, 255, 0.3);
-
-      --accent-blue: #3b82f6;
-      --accent-purple: #8b5cf6;
-      --accent-blue-glow: rgba(59, 130, 246, 0.25);
-      --accent-green: #10b981;
-
-      --text-main: #f3f4f6;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-
-      --blur-val: blur(18px);
-      --radius-lg: 16px;
-      --radius-md: 10px;
-      --radius-sm: 6px;
-
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      background-image:
-        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12), transparent 35%),
-        radial-gradient(circle at 85% 75%, rgba(139, 92, 246, 0.09), transparent 35%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      padding: 2.5rem 1.5rem 4rem;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-
-    /* =========================
-       TOP BAR
-    ========================= */
-
-    .top-bar {
-      display: flex;
-      align-items: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .home-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      transition: var(--transition);
-    }
-
-    .home-link:hover {
-      color: var(--text-main);
-      transform: translateX(-2px);
-    }
-
-    .home-arrow {
-      color: var(--accent-blue);
-      font-size: 1rem;
-      transition: transform 0.25s ease;
-    }
-
-    .home-link:hover .home-arrow {
-      transform: translateX(-3px);
-    }
-
-    .home-divider {
-      width: 1px;
-      height: 18px;
-      background: rgba(255, 255, 255, 0.1);
-      margin: 0 0.75rem;
-    }
-
-    .page-brand {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 0.04em;
-    }
-
-    .brand-badge {
-      margin-left: 0.45rem;
-      font-size: 0.6rem;
-      padding: 3px 7px;
-      background: rgba(59, 130, 246, 0.12);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      color: #60a5fa;
-      border-radius: 5px;
-      text-transform: uppercase;
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .header-section {
-      margin-bottom: 2rem;
-    }
-
-    .eyebrow {
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-blue);
-      margin-bottom: 0.5rem;
-    }
-
-    .main-heading {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      color: var(--text-main);
-      margin-bottom: 0.55rem;
-    }
-
-    .header-desc {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      max-width: 590px;
-      line-height: 1.55;
-    }
-
-    /* =========================
-       PROGRESS
-    ========================= */
-
-    .progress-container {
-      margin-bottom: 2rem;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: var(--blur-val);
-      -webkit-backdrop-filter: var(--blur-val);
-      border-radius: var(--radius-md);
-      padding: 1rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
-    }
-
-    .progress-count {
-      color: var(--text-main);
-      white-space: nowrap;
-    }
-
-    .progress-bar-bg {
-      width: 100%;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-      border-radius: 99px;
-      transition: width 0.4s ease;
-    }
-
-    /* =========================
-       SECTION HEADER
-    ========================= */
-
-    .section-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 1.25rem;
-      gap: 1rem;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .section-description {
-      margin-top: 0.35rem;
-      font-size: 0.8rem;
-      line-height: 1.5;
-      color: var(--text-secondary);
-      max-width: 500px;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
-
-    .nav-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .nav-btn:hover {
-      background: rgba(59, 130, 246, 0.15);
-      border-color: rgba(59, 130, 246, 0.4);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* =========================
-       CAROUSEL
-    ========================= */
-
-    .carousel-track {
-      display: flex;
-      gap: 1.25rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      padding: 0.25rem 0.25rem 1rem;
-      margin: 0 -0.25rem;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-    }
-
-    .carousel-track:active {
-      cursor: grabbing;
-    }
-
-    .carousel-track::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* =========================
-       CARDS
-    ========================= */
-
-    .card {
-      flex: 0 0 calc(33.333% - 0.85rem);
-      min-width: 300px;
-      min-height: 330px;
-      scroll-snap-align: start;
-
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: var(--blur-val);
-      -webkit-backdrop-filter: var(--blur-val);
-      border-radius: var(--radius-lg);
-
-      padding: 1.25rem;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      width: 130px;
-      height: 130px;
-      top: -70px;
-      right: -60px;
-      background: rgba(59, 130, 246, 0.08);
-      border-radius: 50%;
-      filter: blur(20px);
-      pointer-events: none;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--card-border-hover);
-      background: var(--card-bg-hover);
-      box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.3),
-        0 0 20px var(--accent-blue-glow);
-    }
-
-    .card.is-learned {
-      border-color: rgba(16, 185, 129, 0.35);
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .topic-number {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .ai-badge {
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 3px 8px;
-      border-radius: 12px;
-      background: rgba(59, 130, 246, 0.1);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.22);
-    }
-
-    .card-title {
-      font-size: 1.08rem;
-      font-weight: 600;
-      line-height: 1.35;
-      color: var(--text-main);
-      margin-bottom: 0.55rem;
-    }
-
-    .card-desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .tags-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .tag {
-      font-size: 0.63rem;
-      padding: 3px 7px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text-secondary);
-      border-radius: var(--radius-sm);
-    }
-
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .card-actions {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .btn {
-      font-family: inherit;
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.55rem 0.75rem;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      border: none;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      color: #fff;
-      flex: 1;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.92;
-      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.28);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-secondary);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
-    }
-
-    /* =========================
-       LEARNED TOGGLE
-    ========================= */
-
-    .learned-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.72rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-      user-select: none;
-      padding-top: 0.65rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .learned-toggle input {
-      display: none;
-    }
-
-    .checkbox-custom {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 1px solid var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-    }
-
-    .learned-toggle input:checked ~ .checkbox-custom {
-      background: var(--accent-green);
-      border-color: var(--accent-green);
-    }
-
-    .checkbox-custom::after {
-      content: "";
-      width: 4px;
-      height: 7px;
-      border: solid #000;
-      border-width: 0 1.5px 1.5px 0;
-      transform: rotate(45deg);
-      display: none;
-      margin-bottom: 1px;
-    }
-
-    .learned-toggle input:checked ~ .checkbox-custom::after {
-      display: block;
-    }
-
-    .learned-toggle input:checked ~ .label-text {
-      color: var(--accent-green);
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-
-      background: rgba(4, 6, 12, 0.78);
-      backdrop-filter: blur(9px);
-      -webkit-backdrop-filter: blur(9px);
-
-      z-index: 1000;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-
-      padding: 1rem;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal {
-      background: rgba(15, 20, 32, 0.9);
-      border: 1px solid var(--card-border);
-      backdrop-filter: var(--blur-val);
-      -webkit-backdrop-filter: var(--blur-val);
-      border-radius: var(--radius-lg);
-
-      width: 100%;
-      max-width: 680px;
-      max-height: 90vh;
-
-      padding: 1.5rem;
-
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-
-      transform: scale(0.96) translateY(8px);
-      transition: transform 0.25s ease;
-
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .modal-overlay.active .modal {
-      transform: scale(1) translateY(0);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .modal-topic-label {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-blue);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .modal-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: var(--transition);
-      flex-shrink: 0;
-    }
-
-    .modal-close:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.09);
-    }
-
-    .prompt-box-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      min-height: 0;
-    }
-
-    .prompt-label {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .prompt-box {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-md);
-      padding: 1rem;
-
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-
-      max-height: 50vh;
-      overflow-y: auto;
-      white-space: pre-wrap;
-    }
-
-    .prompt-box::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .prompt-box::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-
-      background: rgba(15, 23, 42, 0.94);
-      border: 1px solid rgba(59, 130, 246, 0.5);
-      color: var(--text-main);
-
-      padding: 0.65rem 1rem;
-      border-radius: var(--radius-md);
-
-      font-size: 0.78rem;
-
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-
-      transform: translateY(100px);
-      opacity: 0;
-      transition: all 0.3s ease;
-
-      z-index: 1100;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 900px) {
-      .card {
-        flex: 0 0 calc(50% - 0.625rem);
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 1.5rem 1rem 3rem;
-      }
-
-      .top-bar {
-        margin-bottom: 2rem;
-      }
-
-      .main-heading {
-        font-size: 1.45rem;
-      }
-
-      .header-desc {
-        font-size: 0.85rem;
-      }
-
-      .section-controls {
-        align-items: flex-start;
-      }
-
-      .section-description {
-        max-width: 300px;
-      }
-
-      .card {
-        flex: 0 0 86%;
-        min-width: 0;
-        min-height: 315px;
-      }
-
-      .modal {
-        padding: 1.15rem;
-        max-height: 92vh;
-      }
-
-      .prompt-box {
-        max-height: 55vh;
-        font-size: 0.77rem;
-      }
-
-      .toast {
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
-        justify-content: center;
-      }
-    }
-  </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.2 AI Prompt Engineering for Learning - AreWeCooked?</title>
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            --bg-main: #0b0914;
+            --bg-card: rgba(22, 18, 38, 0.65);
+            --bg-card-hover: rgba(30, 24, 52, 0.85);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --bg-glass-elevated: rgba(30, 23, 50, 0.7);
+            
+            --border-subtle: rgba(139, 92, 246, 0.15);
+            --border-glow: rgba(139, 92, 246, 0.4);
+            --border-strong: rgba(168, 85, 247, 0.6);
+
+            --accent-purple: #8b5cf6;
+            --accent-purple-light: #a78bfa;
+            --accent-blue: #3b82f6;
+            --accent-blue-light: #60a5fa;
+            --accent-cyan: #06b6d4;
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.2);
+
+            --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.15);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ==========================================================================
+           2. BASE & RESET
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.5;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar for Page */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: var(--radius-full);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.5);
+        }
+
+        /* Focus Outline Accessibility */
+        :focus-visible {
+            outline: 2px solid var(--accent-purple-light);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION
+           ========================================================================== */
+        .nav-header {
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 0.85rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            transition: var(--transition-fast);
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+            border-color: var(--border-glow);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .module-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--accent-purple-light);
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-full);
+            text-transform: uppercase;
+        }
+
+        /* ==========================================================================
+           4. HERO & PROGRESS SECTION
+           ========================================================================== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                grid-template-columns: 1.2fr 0.8fr;
+                align-items: center;
+            }
+        }
+
+        .hero-eyebrow {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-blue-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 580px;
+        }
+
+        .progress-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .progress-count {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-purple-light);
+        }
+
+        .progress-bar-bg {
+            height: 8px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-bottom: 0.85rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue));
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .progress-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-reset {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: var(--transition-fast);
+            padding: 0;
+        }
+
+        .btn-reset:hover {
+            color: #ef4444;
+        }
+
+        /* ==========================================================================
+           5. CONTROLS (SEARCH & CAROUSEL NAV)
+           ========================================================================== */
+        .controls-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .controls-bar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 360px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            color: var(--text-main);
+            font-size: 0.875rem;
+            transition: var(--transition-fast);
+        }
+
+        .search-input:focus {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+            background: rgba(22, 18, 38, 0.85);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: var(--text-dim);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .topic-counter {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-right: 0.5rem;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ==========================================================================
+           6. HORIZONTAL CAROUSEL
+           ========================================================================== */
+        .carousel-wrapper {
+            position: relative;
+            margin: 0 -1.5rem;
+            padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        .carousel {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1.25rem;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding-bottom: 0.5rem;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel.active {
+            cursor: grabbing;
+        }
+
+        .carousel::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        /* ==========================================================================
+           7. PROMPT CARD DESIGN
+           ========================================================================== */
+        .card {
+            flex: 0 0 calc(100% - 1rem); /* Mobile Default: 1 visible */
+            scroll-snap-align: start;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+            min-height: 310px;
+        }
+
+        @media (min-width: 640px) {
+            .card {
+                flex: 0 0 calc(50% - 0.75rem); /* Tablet: 2 visible */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card {
+                flex: 0 0 calc(33.333% - 0.85rem); /* Desktop: 3 visible */
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card), var(--shadow-glow);
+            background: var(--bg-card-hover);
+        }
+
+        .card.learned {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .card.learned::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--success);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.85rem;
+        }
+
+        .card-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            font-mono: monospace;
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .ai-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue-light);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .completed-indicator {
+            display: none;
+            width: 18px;
+            height: 18px;
+            background: var(--success);
+            color: #000;
+            border-radius: var(--radius-full);
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: bold;
+        }
+
+        .card.learned .completed-indicator {
+            display: flex;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.45;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            font-size: 0.775rem;
+            font-weight: 600;
+            padding: 0.55rem 0.75rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple-light);
+            border: 1px solid var(--border-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-purple);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        .card.learned .btn-secondary {
+            background: var(--success-glow);
+            color: var(--success);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        /* Carousel Scroll Progress Bar */
+        .scroll-progress-container {
+            width: 100%;
+            max-width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0.5rem auto 0 auto;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-purple-light);
+            border-radius: var(--radius-full);
+        }
+
+        .no-results {
+            width: 100%;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* ==========================================================================
+           8. MODAL COMPONENT
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 3, 10, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background: var(--bg-glass-elevated);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.2);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 680px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #d1d5db;
+        }
+
+        .prompt-box {
+            background: rgba(10, 8, 20, 0.6);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            font-family: inherit;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #e5e7eb;
+
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            background: rgba(15, 11, 26, 0.5);
+        }
+
+        /* ==========================================================================
+           9. TOAST SYSTEM
+           ========================================================================== */
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1100;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: rgba(22, 18, 38, 0.95);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            color: var(--text-main);
+            padding: 0.75rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--success);
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="container">
+    <div class="container">
+        <!-- TOP NAVIGATION -->
+        <nav class="nav-header">
+            <a href="../roadmap.html" class="back-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Roadmap
+            </a>
+            <span class="module-badge">MODULE 1.1</span>
+        </nav>
 
-```
-<!-- =========================
-     TOP BAR
-========================== -->
+        <!-- HERO & PROGRESS -->
+        <header class="hero">
+            <div>
+                <div class="hero-eyebrow">AI LEARNING MODULE</div>
+                <h1 class="hero-title">From “what is this?” to “I got this.”</h1>
+                <p class="hero-desc">
+                    Master programming & DSA logic using structured AI prompts. Designed for C++, Java, and Python learners to trigger Socratic reasoning, deep debugging, and active recall.
+                </p>
+            </div>
+            
+            <div class="progress-card">
+                <div class="progress-header">
+                    <span class="progress-title">Your Learning Progress</span>
+                    <span class="progress-count" id="progressCount">0 / 15</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-footer">
+                    <span style="font-size: 0.75rem; color: var(--text-dim);">Saved automatically</span>
+                    <button class="btn-reset" id="btnReset" aria-label="Reset all progress">Reset Progress</button>
+                </div>
+            </div>
+        </header>
 
-<div class="top-bar">
+        <!-- CONTROLS BAR -->
+        <section class="controls-bar">
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search prompts or tags..." aria-label="Search prompts">
+            </div>
 
-  <a href="../../index.html" class="home-link" aria-label="Go to homepage">
-    <span class="home-arrow">←</span>
-    <span>Home</span>
-  </a>
+            <div class="carousel-controls">
+                <span class="topic-counter" id="topicCounter">15 AI Prompts</span>
+                <button class="nav-btn" id="btnPrev" aria-label="Previous card">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="nav-btn" id="btnNext" aria-label="Next card">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </section>
 
-  <span class="home-divider"></span>
-
-  <div class="page-brand">
-    AreWeCooked?
-    <span class="brand-badge">DSA Roadmap</span>
-  </div>
-
-</div>
-
-<!-- =========================
-     HEADER
-========================== -->
-
-<header class="header-section">
-
-  <div class="eyebrow">Module 1.1</div>
-
-  <h1 class="main-heading">Learn the Basics</h1>
-
-  <p class="header-desc">
-    Learn each topic with AI in your own language, then come back here and prove it by solving.
-  </p>
-
-</header>
-
-<!-- =========================
-     PROGRESS
-========================== -->
-
-<div class="progress-container">
-
-  <div class="progress-header">
-    <span>Your Progress</span>
-
-    <span class="progress-count" id="progress-text">
-      0 / 7 Topics Completed
-    </span>
-  </div>
-
-  <div class="progress-bar-bg">
-    <div class="progress-bar-fill" id="progress-fill"></div>
-  </div>
-
-</div>
-
-<!-- =========================
-     AI SECTION
-========================== -->
-
-<div class="section-controls">
-
-  <div>
-
-    <div class="eyebrow">
-      Interactive Learning
+        <!-- CAROUSEL -->
+        <main class="carousel-wrapper">
+            <div class="carousel" id="carousel">
+                <!-- 15 Cards Populated Dynamically via JavaScript -->
+            </div>
+            <div class="no-results" id="noResults">No matching AI prompt modules found.</div>
+            <div class="scroll-progress-container">
+                <div class="scroll-progress-bar" id="scrollIndicator"></div>
+            </div>
+        </main>
     </div>
 
-    <h2 class="section-title">
-      Learn with AI
-    </h2>
-
-    <p class="section-description">
-      Pick a topic, copy the prompt, and let AI teach you interactively.
-    </p>
-
-  </div>
-
-  <div class="nav-buttons">
-
-    <button
-      class="nav-btn"
-      id="prevBtn"
-      aria-label="Previous topics"
-      type="button"
-    >
-      ←
-    </button>
-
-    <button
-      class="nav-btn"
-      id="nextBtn"
-      aria-label="Next topics"
-      type="button"
-    >
-      →
-    </button>
-
-  </div>
-
-</div>
-
-<!-- =========================
-     CAROUSEL
-========================== -->
-
-<div class="carousel-track" id="carouselTrack">
-
-  <!-- CARD 01 -->
-  <div class="card" data-id="1">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">01</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Language Basics
-      </h3>
-
-      <p class="card-desc">
-        Build the programming foundation you actually need before starting DSA.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">C++</span>
-        <span class="tag">Java</span>
-        <span class="tag">Python</span>
-      </div>
-
+    <!-- PROMPT MODAL -->
+    <div class="modal-overlay" id="promptModal" aria-hidden="true" role="dialog">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Topic Prompt</h2>
+                <button class="modal-close" id="modalClose" aria-label="Close modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="prompt-box" id="modalPromptText"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                <button class="btn btn-primary" id="modalCopyBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy Prompt
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(1)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(1)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="1"
-          onchange="toggleLearned(1, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 02 -->
-  <div class="card" data-id="2">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">02</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Build-up Logical Thinking
-      </h3>
-
-      <p class="card-desc">
-        Learn how to turn a problem statement into logic before writing code.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">Logic</span>
-        <span class="tag">Problem Solving</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(2)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(2)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="2"
-          onchange="toggleLearned(2, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 03 -->
-  <div class="card" data-id="3">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">03</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Patterns
-      </h3>
-
-      <p class="card-desc">
-        Understand rows, columns and nested loops instead of memorising patterns.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">Loops</span>
-        <span class="tag">Nested Loops</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(3)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(3)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="3"
-          onchange="toggleLearned(3, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 04 -->
-  <div class="card" data-id="4">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">04</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        STL / Collections
-      </h3>
-
-      <p class="card-desc">
-        Learn the data structures and tools your language gives you for DSA.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">STL</span>
-        <span class="tag">Collections</span>
-        <span class="tag">DSA</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(4)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(4)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="4"
-          onchange="toggleLearned(4, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 05 -->
-  <div class="card" data-id="5">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">05</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Basic Maths
-      </h3>
-
-      <p class="card-desc">
-        Build the mathematical thinking behind common beginner DSA problems.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">Numbers</span>
-        <span class="tag">Primes</span>
-        <span class="tag">GCD</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(5)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(5)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="5"
-          onchange="toggleLearned(5, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 06 -->
-  <div class="card" data-id="6">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">06</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Basic Recursion
-      </h3>
-
-      <p class="card-desc">
-        Understand calls, base cases and the stack before solving recursion problems.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">Recursion</span>
-        <span class="tag">Call Stack</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(6)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(6)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="6"
-          onchange="toggleLearned(6, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-
-  <!-- CARD 07 -->
-  <div class="card" data-id="7">
-
-    <div>
-
-      <div class="card-top">
-        <span class="topic-number">07</span>
-        <span class="ai-badge">AI Learn</span>
-      </div>
-
-      <h3 class="card-title">
-        Basic Hashing
-      </h3>
-
-      <p class="card-desc">
-        Learn when storing information can make a problem dramatically faster.
-      </p>
-
-      <div class="tags-wrapper">
-        <span class="tag">Hashing</span>
-        <span class="tag">Frequency</span>
-        <span class="tag">Lookup</span>
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="card-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="openModal(7)"
-          type="button"
-        >
-          View Prompt
-        </button>
-
-        <button
-          class="btn btn-secondary"
-          onclick="copyPrompt(7)"
-          type="button"
-        >
-          Copy
-        </button>
-
-      </div>
-
-      <label class="learned-toggle">
-
-        <input
-          type="checkbox"
-          data-learned-id="7"
-          onchange="toggleLearned(7, this.checked)"
-        >
-
-        <span class="checkbox-custom"></span>
-
-        <span class="label-text">
-          Mark as learned
-        </span>
-
-      </label>
-
-    </div>
-
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <!-- =========================
-       PROMPT MODAL
-  ========================== -->
-
-  <div
-    class="modal-overlay"
-    id="modalOverlay"
-    onclick="closeModalOnOuterClick(event)"
-    aria-hidden="true"
-  >
-
-```
-<div
-  class="modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="modalTitle"
->
-
-  <div class="modal-header">
-
-    <div>
-
-      <div
-        class="modal-topic-label"
-        id="modalTopicLabel"
-      >
-        Topic 01
-      </div>
-
-      <div
-        class="modal-title"
-        id="modalTitle"
-      >
-        Language Basics
-      </div>
-
-    </div>
-
-    <button
-      class="modal-close"
-      onclick="closeModal()"
-      aria-label="Close prompt"
-      type="button"
-    >
-      ×
-    </button>
-
-  </div>
-
-
-  <div class="prompt-box-wrapper">
-
-    <span class="prompt-label">
-      AI Prompt
-    </span>
-
-    <div
-      class="prompt-box"
-      id="modalPromptText"
-    >
-      Loading prompt...
-    </div>
-
-  </div>
-
-
-  <div class="modal-actions">
-
-    <button
-      class="btn btn-secondary"
-      onclick="closeModal()"
-      type="button"
-    >
-      Close
-    </button>
-
-    <button
-      class="btn btn-primary"
-      id="modalCopyBtn"
-      onclick="copyCurrentModalPrompt()"
-      type="button"
-    >
-      Copy Prompt
-    </button>
-
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <!-- =========================
-       TOAST
-  ========================== -->
-
-  <div
-    class="toast"
-    id="toast"
-    role="status"
-    aria-live="polite"
-  >
-
-```
-<span>✓</span>
-
-<span id="toastMsg">
-  Prompt copied to clipboard!
-</span>
-```
-
-  </div>
-
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
-
-  <script>
-
-    /* ============================================================
-       AI PROMPTS
-    ============================================================ */
-
-    const promptsData = {
-
-      1: {
-        title: "Language Basics",
-
-        prompt: `Act as my personal programming fundamentals tutor for DSA.
-
-First ask me which language I am using:
-- C++
-- Java
-- Python
-
-Also ask me how much programming I already know.
-
-My goal is NOT to master the entire programming language. I want to learn the programming fundamentals I actually need before starting DSA and become comfortable solving basic problems independently.
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JavaScript logic -->
+    <script>
+        /* ==========================================================================
+           1. PROMPT DATA ARRAY (15 MULTI-LANGUAGE TUTOR PROMPTS)
+           ========================================================================== */
+        const topics = [
+            {
+                id: 1,
+                title: "Input & Output",
+                desc: "Learn how to take input from the user and display output clearly. Understand the basic syntax and differences across C++, Java, Python, and other languages.",
+                tags: ["Input & Output", "Beginner", "Multi-Lang"],
+                prompt: `You are my personal programming tutor.
+
+Before teaching anything, ask me:
+
+"Which programming language do you want to learn?"
+Give me the options:
+1. C++
+2. Java
+3. Python
+4. Another language
+
+Wait for my answer and teach me Input & Output specifically in the language I choose.
+
+I want to understand how to take input from the user and display output.
 
 Teach me interactively, not like a textbook.
 
-Start by checking my current level with a few simple questions or a tiny coding task. Then create a learning path based on my level.
+1. First ask me what I already know about Input & Output.
+2. Explain the basic idea in simple language.
+3. Show the correct syntax for the language I selected.
+4. Explain each important part of the code.
+5. Give simple examples and ask me to predict the output before revealing it.
+6. Explain common beginner mistakes.
+7. Give me small exercises to solve myself.
+8. Don't immediately give me the solution. Give hints if I get stuck.
+9. Gradually increase the difficulty.
+10. If I choose another language, adapt all examples and syntax to that language.
 
-Teach ONE concept at a time.
+At the end, give me a short quiz and a few practice questions to make sure I actually understand Input & Output.
 
-For every concept:
+Keep everything beginner-friendly, practical, and interactive. Avoid unnecessary theory.`
+            },
+            {
+                id: 2,
+                title: "Language Basics",
+                desc: "Learn the building blocks of programming: variables, data types, operators, and basic syntax. Understand how these fundamentals work in the language you choose and how they differ across languages.",
+                tags: ["Fundamentals", "Syntax", "Variables & Data Types"],
+                prompt: `You are my personal programming tutor.
 
-1. Explain the idea simply.
-2. Show a small example in my chosen language.
-3. Explain why the code works.
-4. Ask me a question to check my understanding.
-5. Give me a small problem to solve myself.
-6. Let me attempt it before showing the solution.
-7. If I get stuck, give hints progressively.
-8. If my solution is wrong, help me identify and fix the mistake instead of immediately replacing my code.
-9. Explain important edge cases.
-10. Move on only when I reasonably understand the concept.
+Before teaching anything, ask me:
 
-Cover the programming fundamentals needed for beginner DSA:
+"Which programming language do you want to learn?"
+Give me the options:
+1. C++
+2. Java
+3. Python
+4. Another language
 
+Wait for my answer and teach me Language Basics specifically in the language I choose.
+
+I want to understand the fundamental building blocks of programming, including:
 - Variables
 - Data types
-- Input/output
+- Constants
 - Operators
-- Type conversion where relevant
-- if/else
-- switch where relevant
-- for loops
-- while loops
-- nested loops
-- functions
-- parameters and return values
-- basic scope
-- arrays/lists
-- strings
-- basic language features needed for problem solving
-
-Adapt EVERYTHING to my chosen language.
-
-Connect each concept to DSA. Explain how loops, conditions, functions, arrays/lists and strings will later appear in actual DSA problems.
-
-Do not make me memorize syntax. Make me think.
-
-Gradually introduce:
-
-- problem understanding
-- writing simple logic
-- pseudocode
-- dry runs
-- edge cases
-- debugging
-- basic time complexity
-- basic space complexity
-
-When I give you code, first understand what I was trying to do. Then point out the exact issue, explain WHY it happens, and give me a hint before giving corrected code.
-
-Periodically test me with:
-
-- output prediction
-- debugging
-- dry runs
-- small coding problems
-- "what would you change?" questions
-
-Do not give huge theory dumps.
-Do not reveal solutions immediately.
-Do not rush.
-Adapt the difficulty to me.
-
-At the end, give me a small assessment and tell me which fundamentals I should revise before moving to DSA.
-
-Start by asking me which language I use and what I already know.`
-      },
-
-
-      2: {
-        title: "Build-up Logical Thinking",
-
-        prompt: `Act as my personal problem-solving tutor for DSA.
-
-I want to develop the ability to look at a programming problem and figure out the logic myself instead of immediately searching for a solution.
-
-First ask me whether I use C++, Java, or Python and remember my choice throughout the session.
-
-Do NOT teach this like a theory chapter.
-
-Teach me how to think.
-
-Start with very simple problems and gradually increase the difficulty.
-
-For every problem, train me through this process:
-
-1. Read the problem carefully.
-2. Identify what is given.
-3. Identify what needs to be found.
-4. Identify important constraints if provided.
-5. Break the problem into smaller steps.
-6. Look for patterns or observations.
-7. Decide which programming concepts are needed.
-8. Write the logic/pseudocode.
-9. Dry-run the logic manually.
-10. Convert it into code.
-11. Test normal and edge cases.
-12. Think about time and space complexity.
-
-Do NOT give me the solution immediately.
-
-Ask me what I think first.
-
-If I am stuck:
-
-- give a small hint
-- then a stronger hint
-- only reveal the approach if I still cannot progress
-
-After I solve a problem, ask me whether there is another way to solve it and compare the approaches.
-
-Include exercises involving:
-
-- conditions
-- loops
-- nested loops
-- numbers
-- arrays/lists
-- strings
-- simple patterns
-- basic mathematical logic
-
-Teach me to recognise common problem-solving patterns.
-
-Occasionally give me a problem without telling me which concept it uses. I should identify the approach myself.
-
-If I make the same mistake repeatedly, stop and teach that specific thinking gap.
-
-Do not focus on memorising code.
-
-Focus on:
-
-PROBLEM → OBSERVATION → LOGIC → APPROACH → CODE → TEST
-
-At the end, give me a mini challenge where I must explain my approach BEFORE writing code.
-
-Start by asking me a very easy problem and let me think.`
-      },
-
-
-      3: {
-        title: "Patterns",
-
-        prompt: `Act as my personal DSA patterns tutor.
-
-I use patterns to improve my understanding of nested loops and logical thinking, not to memorise pattern code.
-
-First ask me whether I use C++, Java, or Python and use that language throughout the session.
-
-Teach me patterns progressively from extremely simple to challenging.
-
-For every pattern:
-
-1. Show me the expected output.
-2. Ask me to observe it.
-3. Ask how many rows there are.
-4. Ask what changes from row to row.
-5. Make me identify the number of columns/items.
-6. Make me identify spaces if they exist.
-7. Ask me what should be printed in each position.
-8. Help me derive the loop structure.
-9. Let me attempt the code.
-10. Give hints if I get stuck.
-11. Dry-run the loops.
-12. Explain the final solution only after I have tried.
-
-Start with:
-
-- solid star patterns
-- increasing/decreasing patterns
-- number patterns
-- character patterns
-
-Then gradually introduce:
-
-- spaces
-- pyramids
-- inverted pyramids
-- symmetrical patterns
-- changing row/column relationships
-- more complex nested-loop patterns
-
-Do NOT let me memorise templates.
-
-If I ask for the code immediately, first ask me to explain the row/column logic.
-
-When I make a mistake, identify whether the problem is:
-
-- row logic
-- column logic
-- space calculation
-- loop bounds
-- printed value
-- nested-loop structure
-
-Make me predict the output of small loops and dry-run them.
-
-Gradually increase difficulty only when I demonstrate understanding.
-
-At the end, give me several unseen patterns and ask me to derive the logic without help.
-
-The goal is:
-
-OBSERVE → FIND THE PATTERN → DERIVE LOOPS → CODE → DRY RUN
-
-Start with a very simple pattern and ask me what I notice.`
-      },
-
-
-      4: {
-        title: "STL / Collections",
-
-        prompt: `Act as my personal DSA data-structures tutor.
-
-First ask me whether I use C++, Java, or Python.
-
-Adapt the entire lesson to my language.
-
-My goal is not to memorise every library function. I want to understand the data structures and tools I will actually use while solving DSA problems.
-
-Teach one structure at a time.
-
-For every structure, explain:
-
-1. What it is.
-2. Why it exists.
-3. What problem it solves.
-4. When I should use it.
-5. Important operations.
-6. Time complexity of those operations.
-7. A tiny example.
-8. A small problem where I actually use it.
-
-For C++, cover useful STL structures such as:
-
-- vector
-- pair
-- set
-- unordered_set
-- map
-- unordered_map
-- stack
-- queue
-- priority_queue
-- iterators
-- useful algorithms
-
-For Java, teach the relevant Java Collections equivalents.
-
-For Python, teach the appropriate built-in data structures and useful modules/tools for DSA.
-
-Do NOT teach every available API method.
-
-Focus on practical DSA usage.
-
-After teaching a structure, give me a problem and ask:
-
-"Would you use this structure here? Why?"
-
-Make me choose the data structure myself before telling me the answer.
-
-Include comparison questions such as:
-
-- vector vs set
-- map vs unordered_map
-- set vs unordered_set
-- stack vs queue
-- array/list vs hash-based structure
-
-Explain trade-offs and complexity when relevant.
-
-When I give code, review how I used the data structure and suggest improvements without unnecessarily rewriting my solution.
-
-Gradually move from simple usage to actual beginner DSA problems.
-
-At the end, give me a mixed challenge where I must decide which structure to use without being told.
-
-The goal is:
-
-UNDERSTAND → CHOOSE → USE → SOLVE
-
-Start by asking which language I use and what data structures I already know.`
-      },
-
-
-      5: {
-        title: "Basic Maths",
-
-        prompt: `Act as my personal Basic Maths for DSA tutor.
-
-First ask whether I use C++, Java, or Python and use that language for every coding example.
-
-Teach only the mathematics that is genuinely useful for beginner DSA and problem solving.
-
-Do not turn this into a school mathematics lecture.
-
-Teach through:
-
-OBSERVATION → LOGIC → ALGORITHM → CODE → PROBLEM
-
-Cover topics progressively, including:
-
-- even and odd numbers
-- counting digits
-- extracting digits
-- sum of digits
-- reversing a number
-- palindrome numbers
-- Armstrong numbers
-- factors
-- divisors
-- prime numbers
-- GCD
-- LCM
-- basic number properties
-
-For each topic:
-
-1. Explain the intuition.
-2. Ask me what I think the solution might be.
-3. Let me derive the logic.
-4. Use a small example.
-5. Dry-run it manually.
-6. Let me write the code.
-7. Help me debug it if necessary.
-8. Explain time and space complexity.
-9. Give me a similar problem to solve.
-
-Do not immediately give me formulas or code if I can derive the idea myself.
-
-For problems involving optimisation, first let me think of a simple solution and then help me discover a better approach.
-
-For example, when learning prime checking, don't simply give me the sqrt(N) solution. Help me understand WHY checking beyond sqrt(N) is unnecessary.
-
-Use edge cases and tricky inputs to test my understanding.
-
-At the end, give me a mixed set of beginner maths problems without telling me which technique each one requires.
-
-The goal is to make mathematical observations naturally while solving DSA problems.
-
-Start with a very simple number problem and let me explain my approach.`
-      },
-
-
-      6: {
-        title: "Basic Recursion",
-
-        prompt: `Act as my personal recursion tutor for DSA.
-
-First ask whether I use C++, Java, or Python and use that language throughout the session.
-
-Assume I may know nothing about recursion.
-
-Do NOT start with difficult recursion problems.
-
-I want to genuinely understand what recursion is rather than memorise recursive code.
-
-Teach me through small experiments and tracing.
-
-Start with:
-
-- what a function call actually does
-- what it means for a function to call itself
-- base case
-- recursive case
-- why the base case is necessary
-- how calls are placed on the call stack
-- how recursion returns and unwinds
-
-For every example:
-
-1. Show the problem.
-2. Ask me what I think should happen.
-3. Let me predict the calls.
-4. Make me manually trace them.
-5. Explain the call stack.
-6. Let me write the code.
-7. Dry-run my code.
-8. Correct my mistakes through hints.
-
-Start with extremely simple problems such as:
-
-- printing something N times
-- printing numbers
-- printing numbers in reverse
-- sum of first N numbers
-- factorial
-- basic recursive problems
-
-Do NOT rush into backtracking or advanced recursion.
-
-Teach me how to identify:
-
-- base case
-- changing parameter
-- recursive call
-- progress toward the base case
-
-Whenever possible, ask me:
-
-"What happens in the next recursive call?"
-
-and:
-
-"What happens when the base case is reached?"
-
-If I cannot trace a recursive function, stop and work on tracing before moving ahead.
-
-After I understand the basics, give me problems where I have to design the recursive logic myself.
-
-Explain time and space complexity, especially recursion stack space, once I am ready.
-
-At the end, give me several small recursive functions and ask me to predict their output and call sequence.
-
-The goal is:
-
-UNDERSTAND THE CALL → TRACE IT → DESIGN IT → CODE IT
-
-Start from absolute zero and ask me what I currently understand about recursion.`
-      },
-
-
-      7: {
-        title: "Basic Hashing",
-
-        prompt: `Act as my personal hashing tutor for DSA.
-
-First ask whether I use C++, Java, or Python and adapt all examples to my language.
-
-Do not begin by throwing map/set syntax at me.
-
-First make me understand WHY hashing is useful.
-
-Start with a simple problem where I need to repeatedly search for or count values.
-
-Let me experience the inefficient approach first.
-
-Then help me discover the idea of storing information so that I can access it quickly.
-
-Teach progressively:
-
-- lookup
-- frequency counting
-- frequency arrays
-- maps/dictionaries
-- sets
-- unordered/hash-based structures
-- when hashing is useful
-- when hashing is NOT necessary
-- time and space trade-offs
-
-For every concept:
-
-1. Give me a small problem.
-2. Let me think about a brute-force approach.
-3. Ask what makes it slow.
-4. Help me identify repeated work.
-5. Introduce hashing as a solution.
-6. Explain the intuition.
-7. Let me implement it.
-8. Dry-run it.
-9. Analyse time and space complexity.
-10. Give me a similar problem.
-
-Adapt the implementation:
-
-C++ → unordered_map, unordered_set, map, set, etc.
-
-Java → HashMap, HashSet, TreeMap, etc.
-
-Python → dict, set, Counter, etc., when appropriate.
-
-Do not teach every method.
-
-Focus on knowing WHEN and WHY to use each structure.
-
-Give me problems involving:
-
-- frequency counting
-- duplicates
-- occurrence counting
-- lookup
-- two-sum style thinking
-- basic array/list problems
-- basic string frequency problems
-
-Do not tell me "use hashing" before I have tried to identify the approach.
-
-When I solve a problem using hashing, ask whether another approach exists and compare the trade-offs.
-
-At the end, give me mixed problems where I must decide between:
-
-- brute force
-- frequency array
-- map/dictionary
-- set
-- another approach
-
-The goal is not memorising HashMap syntax.
-
-The goal is recognising:
-
-"Can I store information so I don't have to repeatedly search for it?"
-
-Start with a simple frequency-counting problem and let me think before explaining hashing.`
-      }
-
-    };
-
-
-    /* ============================================================
-       STATE
-    ============================================================ */
-
-    let activeModalId = null;
-
-    const STORAGE_KEY = "arewecooked_learn_basics_progress";
-
-    let learnedSet = new Set();
-
-
-    /* ============================================================
-       DOM
-    ============================================================ */
-
-    const track = document.getElementById("carouselTrack");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-
-    const modalOverlay = document.getElementById("modalOverlay");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalTopicLabel = document.getElementById("modalTopicLabel");
-    const modalPromptText = document.getElementById("modalPromptText");
-
-    const progressText = document.getElementById("progress-text");
-    const progressFill = document.getElementById("progress-fill");
-
-
-    /* ============================================================
-       CAROUSEL
-    ============================================================ */
-
-    function getScrollAmount() {
-
-      const firstCard = track.querySelector(".card");
-
-      if (!firstCard) {
-        return 320;
-      }
-
-      return firstCard.offsetWidth + 20;
-    }
-
-
-    prevBtn.addEventListener("click", () => {
-
-      track.scrollBy({
-        left: -getScrollAmount(),
-        behavior: "smooth"
-      });
-
-    });
-
-
-    nextBtn.addEventListener("click", () => {
-
-      track.scrollBy({
-        left: getScrollAmount(),
-        behavior: "smooth"
-      });
-
-    });
-
-
-    /* ============================================================
-       LEARNED PROGRESS
-    ============================================================ */
-
-    function saveProgress() {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify([...learnedSet])
-      );
-
-    }
-
-
-    function loadProgress() {
-
-      try {
-
-        const saved = JSON.parse(
-          localStorage.getItem(STORAGE_KEY)
-        );
-
-        if (Array.isArray(saved)) {
-
-          learnedSet = new Set(
-            saved.map(Number)
-          );
-
+- Basic syntax
+- Naming rules
+- Declaring and initializing variables
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about these basics.
+2. Explain each concept in simple language before showing code.
+3. Use small, practical examples.
+4. Explain what each important line of code does.
+5. Ask me questions throughout the lesson and wait for my answers.
+6. Give me short code snippets and ask me to predict what they will do.
+7. Explain common beginner mistakes and why they happen.
+8. Give me small exercises after each major concept.
+9. Don't immediately give me solutions. Give hints if I get stuck.
+10. Gradually increase the difficulty.
+11. If I choose another language, adapt all examples and syntax to that language.
+12. When useful, briefly point out how the same concept is handled differently in C++, Java, and Python.
+
+At the end, give me:
+- 5 quick concept-check questions
+- 2 code-prediction questions
+- 2 small coding exercises
+
+Then evaluate my answers and tell me which fundamentals I should revise.
+
+Focus on understanding rather than memorizing syntax. Keep the lesson beginner-friendly, practical, and interactive. Avoid unnecessary theory.`
+            },
+            {
+                id: 3,
+                title: "If / Else If / Else",
+                desc: "Learn how programs make decisions using conditions and comparisons. Understand how to handle different situations with if, else if, and else in the language you choose.",
+                tags: ["Conditions", "Decision Making", "Control flow"],
+                prompt: `You are my personal programming tutor.
+
+Before teaching anything, ask me:
+
+"Which programming language do you want to learn?"
+Give me the options:
+1. C++
+2. Java
+3. Python
+4. Another language
+
+Wait for my answer and teach me If / Else If / Else specifically in the language I choose.
+
+I want to understand how programs make decisions using conditions.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about conditions and decision-making.
+2. Explain what a condition is using a simple real-world example.
+3. Teach me if, else if, and else step by step.
+4. Explain comparison and logical operators when they are needed.
+5. Show small examples in the language I selected and explain them line by line.
+6. Give me code snippets and ask me to predict the output before revealing the answer.
+7. Include examples with multiple conditions and nested if statements.
+8. Show me common beginner mistakes, including incorrect conditions and confusing = with == where applicable.
+9. Give me small problems to solve myself.
+10. Do not immediately give me the solution. Give hints progressively if I get stuck.
+11. Gradually increase the difficulty from simple conditions to slightly more complex decision-making.
+12. If I choose another language, adapt all examples and syntax to that language.
+13. When useful, briefly explain how conditional syntax differs between C++, Java, and Python.
+
+At the end, test me with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and identify exactly what I need to improve.
+
+Focus on helping me understand how and why conditional logic works rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.`
+            },
+            {
+                id: 4,
+                title: "Switch Case",
+                desc: "Learn how switch lets your program choose between multiple fixed options based on a value. Understand case, break, default, and when switch is better than multiple if/else conditions.",
+                tags: ["Control flow", "Multiple Choices", "Decision Making"],
+                prompt: `You are my personal programming tutor.
+
+Teach me Switch Case in the programming language I am currently learning.
+
+I want to understand how a program can choose between multiple fixed options based on a value.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about Switch Case and decision-making.
+2. Explain the idea of Switch Case using a simple real-world example.
+3. Teach me the basic structure step by step:
+   - switch
+   - case
+   - break
+   - default
+4. Show a simple example and explain what each important part does.
+5. Give me code snippets and ask me to predict the output before revealing the answer.
+6. Show examples with multiple cases and explain what happens when no case matches.
+7. Explain why and when the break statement is needed and what can happen if it is missing.
+8. Compare Switch Case with if / else if and explain when each approach is more suitable.
+9. Show common beginner mistakes and explain how to fix them.
+10. Give me small coding exercises and let me solve them myself.
+11. Do not immediately give me the solution. Give hints progressively if I get stuck.
+12. Gradually increase the difficulty from simple examples to slightly more challenging problems.
+13. If the language I am learning handles Switch Case differently, explain its actual syntax and behavior instead of forcing another language's syntax onto it.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on understanding how and why Switch Case works rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.`
+            },
+            {
+                id: 5,
+                title: "For Loops",
+                desc: "Learn how for loops repeat a block of code efficiently using a starting point, condition, and update. Understand how to control iterations, work with counters, and build nested loops.",
+                tags: ["Loops", "Iteration", "Control flow"],
+                prompt: `You are my personal programming tutor.
+
+Teach me For Loops in the programming language I am currently learning.
+
+I want to understand how loops repeat a block of code and how to control the number of repetitions.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about loops.
+2. Explain the idea of repetition using a simple real-world example.
+3. Teach me the three main parts of a for loop:
+   - Starting point / initialization
+   - Condition
+   - Update / increment or decrement
+4. Show a simple example and explain each important part step by step.
+5. Give me short code snippets and ask me to predict the output before revealing the answer.
+6. Teach me how to count upward and downward using loops.
+7. Show how to use loops with variables, ranges, and simple calculations.
+8. Introduce nested for loops with simple examples when I understand the basics.
+9. Show common beginner mistakes, such as incorrect conditions, wrong updates, and accidental infinite loops.
+10. Give me small coding exercises and let me solve them myself.
+11. Do not immediately give me the solution. Give hints progressively if I get stuck.
+12. Gradually increase the difficulty from simple repetition to basic problem-solving.
+13. If the language I am learning has different for-loop syntax or behavior, teach me the correct syntax for that language.
+14. Connect loops to practical programming and DSA examples where appropriate.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on helping me understand how and why loops work rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.
+`
+            },
+            {
+                id: 6,
+                title: "While & Do-While Loops",
+                desc: "Learn how while and do-while loops repeat code while a condition is true. Understand when to use each, how they differ from for loops, and how to avoid infinite loops.",
+                tags: ["Loops", "Conditions", "Iteration"],
+                prompt: `You are my personal programming tutor.
+
+Teach me While and Do-While Loops in the programming language I am currently learning.
+
+I want to understand how these loops work, how they differ from For Loops, and when to use each one.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about While and Do-While Loops.
+2. Explain the idea of condition-based repetition using a simple real-world example.
+3. Teach me While Loops step by step:
+   - Condition
+   - Loop body
+   - Updating the condition
+4. Explain Do-While Loops and why the loop body executes at least once.
+5. Clearly compare While, Do-While, and For Loops and explain when each is useful.
+6. Show simple examples and explain each important part step by step.
+7. Give me short code snippets and ask me to predict the output before revealing the answer.
+8. Show examples where the number of repetitions is not known beforehand.
+9. Explain infinite loops, why they happen, and how to prevent them.
+10. Show common beginner mistakes and explain how to fix them.
+11. Give me small coding exercises and let me solve them myself.
+12. Do not immediately give me the solution. Give hints progressively if I get stuck.
+13. Gradually increase the difficulty from simple loops to basic problem-solving.
+14. If the language I am learning has different syntax or behavior for While or Do-While, teach me the correct syntax for that language.
+15. Connect loops to practical programming and beginner DSA examples where appropriate.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on helping me understand how and why these loops work rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.
+
+`
+            },
+            {
+                id: 7,
+                title: "Arrays",
+                desc: "Learn how arrays store multiple values under one variable and how to access, update, and traverse their elements. Build a strong foundation for working with collections of data in programming and DSA.",
+                tags: ["Data Structures", "Indexing", "Traversal"],
+                prompt: `You are my personal programming tutor.
+
+Teach me Arrays in the programming language I am currently learning.
+
+I want to understand how arrays store multiple values, how indexing works, and how to access, modify, and process elements.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about arrays.
+2. Explain the idea of storing multiple values using a simple real-world example.
+3. Teach me the core concepts step by step:
+   - Declaring an array
+   - Initializing an array
+   - Indexing
+   - Accessing elements
+   - Updating elements
+   - Finding the size or length
+   - Traversing an array
+4. Clearly explain why array indexing usually starts at 0.
+5. Show simple examples and explain each important part of the code.
+6. Give me short code snippets and ask me to predict the output before revealing the answer.
+7. Show how loops are commonly used to traverse arrays.
+8. Give examples of searching for an element and finding simple properties such as the largest or smallest value.
+9. Explain common beginner mistakes, especially invalid indexes, incorrect loop conditions, and confusing indexes with values.
+10. Introduce multidimensional arrays only after I understand one-dimensional arrays.
+11. Explain how arrays differ between C++, Java, and Python when relevant to the language I am learning.
+12. Give me small coding exercises and let me solve them myself.
+13. Do not immediately give me the solution. Give hints progressively if I get stuck.
+14. Gradually increase the difficulty from basic array operations to simple problem-solving.
+15. Connect arrays to DSA and explain why they are such an important foundation for later topics.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on helping me understand arrays and indexing rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.
+`
+            },
+            {
+                id: 8,
+                title: "Strings",
+                desc: "Learn how strings store and represent text, and how to access, modify, compare, and process characters. Build the foundation for solving common string problems in programming and DSA.",
+                tags: ["Text handling", "Characters", "String Operations"],
+                prompt: `You are my personal programming tutor.
+
+Teach me Strings in the programming language I am currently learning.
+
+I want to understand how text is stored and handled, how characters are accessed, and how to perform common string operations.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about strings.
+2. Explain what a string is using a simple real-world example.
+3. Teach me the core concepts step by step:
+   - Creating and storing strings
+   - Accessing individual characters
+   - Finding the length of a string
+   - Traversing a string
+   - Comparing strings
+   - Joining or concatenating strings
+   - Searching for characters or smaller strings
+   - Modifying or extracting parts of a string
+4. Explain the difference between a character and a string where relevant.
+5. Show simple examples and explain each important part of the code.
+6. Give me short code snippets and ask me to predict the output before revealing the answer.
+7. Show how loops can be used to process characters in a string.
+8. Explain common beginner mistakes, such as invalid indexes, incorrect length handling, and confusing characters with strings.
+9. Explain the important string features available in the language I am learning without overwhelming me with advanced library functions.
+10. When useful, briefly explain how string handling differs between C++, Java, and Python.
+11. Give me small coding exercises and let me solve them myself.
+12. Do not immediately give me the solution. Give hints progressively if I get stuck.
+13. Gradually increase the difficulty from basic string operations to simple problem-solving.
+14. Introduce beginner-friendly DSA-style string problems such as counting characters, reversing a string, checking a palindrome, and finding repeated characters.
+15. Explain why strings are important in programming and DSA.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on understanding strings and how to work with them rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.
+`
+            },
+            {
+                id: 9,
+                title: "Functions",
+                desc: "Learn how functions break your program into reusable, organized pieces of code. Understand parameters, return values, function calls, and how functions make larger programs easier to build and maintain.",
+                tags: ["Reusability", "Parameters", "Return value"],
+                prompt: `You are my personal programming tutor.
+
+Teach me Functions in the programming language I am currently learning.
+
+I want to understand how functions help break a program into smaller, reusable pieces of code.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about functions.
+2. Explain the idea of a function using a simple real-world example.
+3. Teach me the core concepts step by step:
+   - Defining a function
+   - Calling a function
+   - Parameters
+   - Arguments
+   - Return values
+   - Function scope
+4. Show simple examples and explain each important part of the code.
+5. Give me short code snippets and ask me to predict the output before revealing the answer.
+6. Explain the difference between functions that return a value and functions that simply perform an action.
+7. Teach me how to pass multiple parameters to a function.
+8. Explain Pass by Value and Pass by Reference where the language supports these concepts.
+9. Show common beginner mistakes, such as incorrect parameters, missing return values, and calling functions incorrectly.
+10. Explain how functions help make programs more organized, readable, reusable, and easier to debug.
+11. Give me small coding exercises and let me solve them myself.
+12. Do not immediately give me the solution. Give hints progressively if I get stuck.
+13. Gradually increase the difficulty from simple functions to functions used in small problem-solving tasks.
+14. When relevant, explain how functions differ between C++, Java, and Python.
+15. Connect functions to DSA and show why understanding them is important before moving into recursion and more advanced problem-solving.
+
+At the end, test my understanding with:
+- 5 concept questions
+- 3 code-output prediction questions
+- 3 small coding problems
+
+Evaluate my answers and tell me what I understand well and what I should revise.
+
+Focus on understanding how and why functions work rather than memorizing syntax. Keep the lesson practical, beginner-friendly, and interactive. Avoid unnecessary theory.
+`
+            },
+            {
+                id: 10,
+                title: "Theory with Examples",
+                desc: "Learn how to understand programming concepts through clear explanations followed by practical code examples. Connect the theory to real situations so you understand why the code works, not just how to write it.",
+                tags: ["Concepts", "Examples", "Understanding"],
+                prompt: `You are my personal programming tutor.
+
+Teach me programming concepts using a combination of simple theory, practical examples, and active practice in the programming language I am currently learning.
+
+The goal is not just to memorize syntax. I want to understand what a concept means, why it is used, how it works, and when I should use it.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what concept or topic I want to learn.
+2. Ask me what I already know about it so you can adjust the explanation to my level.
+3. Explain the concept in simple language before showing any code.
+4. Use a relatable real-world analogy when it genuinely makes the concept easier to understand.
+5. Show a small, practical code example.
+6. Explain the example step by step and explain why each important part is used.
+7. Show what happens when the code runs, including the expected output when applicable.
+8. Give me a slightly different example and ask me to predict what it will do before revealing the answer.
+9. Show common beginner mistakes and explain why they happen.
+10. Explain when the concept should and should not be used.
+11. Connect the concept to other programming concepts I have already learned when useful.
+12. Give me a small coding task and let me attempt it myself.
+13. Do not immediately give me the solution. Give progressively stronger hints if I get stuck.
+14. Gradually increase the difficulty and introduce a beginner-friendly DSA example when the concept is relevant.
+15. If the concept behaves differently in C++, Java, and Python, explain the differences clearly when relevant.
+
+After teaching, give me:
+- 5 concept-check questions
+- 3 code-output prediction questions
+- 2 small coding problems
+- 1 slightly challenging problem
+
+Wait for my answers before evaluating them.
+
+When evaluating my answers:
+- Tell me what I got right.
+- Explain exactly what I misunderstood.
+- Give hints instead of immediately revealing solutions where possible.
+- Suggest what I should revise based on my mistakes.
+
+Keep the lesson practical, clear, beginner-friendly, and interactive. Avoid unnecessary theory, long textbook-style explanations, and information that I don't need yet.
+
+The main goal is:
+Understand the concept → see it in action → predict → practice → get feedback → apply it.`
+            },
+            
+//             {
+//                 id: 11,
+//                 title: "Edge Case & Boundary Stress Test",
+//                 desc: "Identify sneaky edge cases that break production code and pass test suites.",
+//                 tags: ["Edge Cases", "Testing", "Robustness"],
+//                 prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
+
+// List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
+
+// Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
+//             },
+//             {
+//                 id: 12,
+//                 title: "Comparative Analysis (X vs Y)",
+//                 desc: "Understand differences, trade-offs, and when to pick one tool over another.",
+//                 tags: ["Comparison", "Trade-offs", "Decision"],
+//                 prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
+
+// Compare them across:
+// 1. Core mechanism difference.
+// 2. Memory footprint comparison.
+// 3. Ideal use cases for Concept A vs Concept B.
+// 4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
+
+// Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
+//             },
+//             {
+//                 id: 13,
+//                 title: "Feynman Technique (Teach-Back)",
+//                 desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
+//                 tags: ["Feynman", "Teaching", "Mastery"],
+//                 prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
+
+// Your role:
+// 1. Listen to my explanation.
+// 2. Call out any gaps, inaccuracies, or overly complex terms I used.
+// 3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
+
+// Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
+//             },
+//             {
+//                 id: 14,
+//                 title: "Progressive Difficulty Challenges",
+//                 desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
+//                 tags: ["Challenges", "Progression", "Practice"],
+//                 prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
+
+// Give me 3 problem descriptions in increasing difficulty:
+// - Level 1: Easy (Warmup)
+// - Level 2: Medium (Standard Interview)
+// - Level 3: Hard (Advanced Application)
+
+// Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
+//             },
+//             {
+//                 id: 15,
+//                 title: "Comprehensive Final Assessment",
+//                 desc: "Validate your complete module mastery with a realistic evaluation test.",
+//                 tags: ["Assessment", "Evaluation", "Final Test"],
+//                 prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+
+// Provide a 3-part comprehensive assessment:
+// 1. Conceptual Multiple Choice (1 Question)
+// 2. Complexity Evaluation (1 Question)
+// 3. Code Implementation Task (1 Practical Problem)
+
+// Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
+//             }
+        ];
+
+        /* ==========================================================================
+           2. DOM REFERENCES
+           ========================================================================== */
+        const carousel = document.getElementById('carousel');
+        const progressBar = document.getElementById('progressBar');
+        const progressCount = document.getElementById('progressCount');
+        const btnReset = document.getElementById('btnReset');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const searchInput = document.getElementById('searchInput');
+        const topicCounter = document.getElementById('topicCounter');
+        const noResults = document.getElementById('noResults');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        // Modal DOM
+        const promptModal = document.getElementById('promptModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPromptText = document.getElementById('modalPromptText');
+        const modalClose = document.getElementById('modalClose');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalCopyBtn = document.getElementById('modalCopyBtn');
+        const toastContainer = document.getElementById('toastContainer');
+
+        /* ==========================================================================
+           3. STATE & LOCALSTORAGE MANAGEMENT
+           ========================================================================== */
+        const STORAGE_KEY = 'arewecooked_module_1_2_progress';
+        let learnedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        let activePromptText = '';
+
+        function saveProgress() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(learnedState));
+            updateProgressUI();
         }
 
-      } catch (error) {
+        function updateProgressUI() {
+            const completedCount = Object.values(learnedState).filter(Boolean).length;
+            const total = topics.length;
+            const percentage = (completedCount / total) * 100;
 
-        learnedSet = new Set();
+            progressBar.style.width = `${percentage}%`;
+            progressCount.textContent = `${completedCount} / ${total}`;
+        }
 
-      }
+        /* ==========================================================================
+           4. RENDER CAROUSEL CARDS
+           ========================================================================== */
+        function renderCards(filteredTopics = topics) {
+            carousel.innerHTML = '';
+            
+            if (filteredTopics.length === 0) {
+                noResults.style.display = 'block';
+                topicCounter.textContent = '0 AI Prompts';
+                return;
+            } else {
+                noResults.style.display = 'none';
+                topicCounter.textContent = `${filteredTopics.length} AI Prompts`;
+            }
 
-      document
-        .querySelectorAll(".learned-toggle input")
-        .forEach(input => {
+            filteredTopics.forEach((topic) => {
+                const isLearned = !!learnedState[topic.id];
+                const card = document.createElement('article');
+                card.className = `card ${isLearned ? 'learned' : ''}`;
+                card.dataset.id = topic.id;
 
-          const id = Number(input.dataset.learnedId);
+                const formattedNum = String(topic.id).padStart(2, '0');
 
-          input.checked = learnedSet.has(id);
+                card.innerHTML = `
+                    <div>
+                        <div class="card-header">
+                            <span class="card-num">[${formattedNum}]</span>
+                            <div class="card-badges">
+                                <span class="ai-badge">AI TUTOR</span>
+                                <div class="completed-indicator" title="Marked as Learned">✓</div>
+                            </div>
+                        </div>
+                        <h3 class="card-title">${topic.title}</h3>
+                        <p class="card-desc">${topic.desc}</p>
+                    </div>
+                    <div>
+                        <div class="card-tags">
+                            ${topic.tags.map(t => `<span class="tag">#${t}</span>`).join('')}
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary btn-view" onclick="openModal(${topic.id})">
+                                View Prompt
+                            </button>
+                            <button class="btn btn-secondary btn-learn" onclick="toggleLearned(${topic.id})">
+                                ${isLearned ? '✓ Learned' : 'Mark Learned'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                carousel.appendChild(card);
+            });
 
-          const card = document.querySelector(
-            `.card[data-id="${id}"]`
-          );
+            updateCarouselButtons();
+            updateScrollIndicator();
+        }
 
-          if (card && input.checked) {
-            card.classList.add("is-learned");
-          }
+        /* ==========================================================================
+           5. INTERACTION & LEARNED TOGGLE
+           ========================================================================== */
+        window.toggleLearned = function(id) {
+            learnedState[id] = !learnedState[id];
+            saveProgress();
 
+            const card = carousel.querySelector(`.card[data-id="${id}"]`);
+            if (card) {
+                const btn = card.querySelector('.btn-learn');
+                if (learnedState[id]) {
+                    card.classList.add('learned');
+                    btn.textContent = '✓ Learned';
+                    showToast('✓ Marked topic as learned');
+                } else {
+                    card.classList.remove('learned');
+                    btn.textContent = 'Mark Learned';
+                    showToast('Topic marked as unlearned');
+                }
+            }
+        };
+
+        btnReset.addEventListener('click', () => {
+            if (confirm("Are you sure you want to reset your progress for Module 1.1?")) {
+                learnedState = {};
+                saveProgress();
+                renderCards(getFilteredTopics());
+                showToast("Progress reset successfully");
+            }
         });
 
-      updateProgress();
-
-    }
-
-
-    function toggleLearned(id, isChecked) {
-
-      const card = document.querySelector(
-        `.card[data-id="${id}"]`
-      );
-
-      if (isChecked) {
-
-        learnedSet.add(id);
-
-        if (card) {
-          card.classList.add("is-learned");
+        /* ==========================================================================
+           6. SEARCH & FILTER
+           ========================================================================== */
+        function getFilteredTopics() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) return topics;
+            return topics.filter(t => 
+                t.title.toLowerCase().includes(query) ||
+                t.desc.toLowerCase().includes(query) ||
+                t.tags.some(tag => tag.toLowerCase().includes(query))
+            );
         }
 
-      } else {
+        searchInput.addEventListener('input', () => {
+            renderCards(getFilteredTopics());
+            carousel.scrollLeft = 0;
+        });
 
-        learnedSet.delete(id);
+        /* ==========================================================================
+           7. HORIZONTAL CAROUSEL DRAG & SCROLL LOGIC
+           ========================================================================== */
+        let isDown = false;
+        let startX;
+        let scrollLeftPos;
 
-        if (card) {
-          card.classList.remove("is-learned");
+        carousel.addEventListener('mousedown', (e) => {
+            // Avoid drag initiation when clicking buttons inside cards
+            if (e.target.closest('button')) return;
+            isDown = true;
+            carousel.classList.add('active');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeftPos = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+            carousel.classList.remove('active');
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.8; // Scroll sensitivity multiplier
+            carousel.scrollLeft = scrollLeftPos - walk;
+        });
+
+        // Navigation Arrows
+        btnPrev.addEventListener('click', () => {
+            const cardWidth = carousel.querySelector('.card')?.offsetWidth || 300;
+            carousel.scrollBy({ left: -(cardWidth + 20), behavior: 'smooth' });
+        });
+
+        btnNext.addEventListener('click', () => {
+            const cardWidth = carousel.querySelector('.card')?.offsetWidth || 300;
+            carousel.scrollBy({ left: cardWidth + 20, behavior: 'smooth' });
+        });
+
+        carousel.addEventListener('scroll', () => {
+            updateCarouselButtons();
+            updateScrollIndicator();
+        });
+
+        function updateCarouselButtons() {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            btnPrev.disabled = carousel.scrollLeft <= 5;
+            btnNext.disabled = carousel.scrollLeft >= maxScroll - 5 || maxScroll <= 0;
         }
 
-      }
-
-      saveProgress();
-      updateProgress();
-
-    }
-
-
-    function updateProgress() {
-
-      const total = 7;
-      const count = learnedSet.size;
-      const percentage = (count / total) * 100;
-
-      progressText.innerText =
-        `${count} / ${total} Topics Completed`;
-
-      progressFill.style.width =
-        `${percentage}%`;
-
-    }
-
-
-    /* ============================================================
-       MODAL
-    ============================================================ */
-
-    function openModal(id) {
-
-      const data = promptsData[id];
-
-      if (!data) {
-        return;
-      }
-
-      activeModalId = id;
-
-      modalTopicLabel.innerText =
-        `Topic ${String(id).padStart(2, "0")}`;
-
-      modalTitle.innerText =
-        data.title;
-
-      modalPromptText.innerText =
-        data.prompt;
-
-      modalOverlay.classList.add("active");
-
-      modalOverlay.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-      document.body.style.overflow = "hidden";
-
-      setTimeout(() => {
-        modalPromptText.scrollTop = 0;
-      }, 50);
-
-    }
-
-
-    function closeModal() {
-
-      modalOverlay.classList.remove("active");
-
-      modalOverlay.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      activeModalId = null;
-
-      document.body.style.overflow = "";
-
-    }
-
-
-    function closeModalOnOuterClick(event) {
-
-      if (event.target === modalOverlay) {
-        closeModal();
-      }
-
-    }
-
-
-    document.addEventListener("keydown", event => {
-
-      if (event.key === "Escape" && activeModalId !== null) {
-        closeModal();
-      }
-
-    });
-
-
-    /* ============================================================
-       COPY PROMPTS
-    ============================================================ */
-
-    async function copyText(text) {
-
-      try {
-
-        await navigator.clipboard.writeText(text);
-
-        return true;
-
-      } catch (error) {
-
-        const textarea =
-          document.createElement("textarea");
-
-        textarea.value = text;
-
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-
-        document.body.appendChild(textarea);
-
-        textarea.select();
-
-        const successful =
-          document.execCommand("copy");
-
-        textarea.remove();
-
-        return successful;
-
-      }
-
-    }
-
-
-    async function copyPrompt(id) {
-
-      const data = promptsData[id];
-
-      if (!data) {
-        return;
-      }
-
-      const success =
-        await copyText(data.prompt);
-
-      if (success) {
-
-        showToast("Prompt copied to clipboard!");
-
-      } else {
-
-        showToast("Couldn't copy the prompt.");
-
-      }
-
-    }
-
-
-    async function copyCurrentModalPrompt() {
-
-      if (activeModalId === null) {
-        return;
-      }
-
-      await copyPrompt(activeModalId);
-
-    }
-
-
-    /* ============================================================
-       TOAST
-    ============================================================ */
-
-    let toastTimeout;
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById("toast");
-
-      const toastMsg =
-        document.getElementById("toastMsg");
-
-      toastMsg.innerText = message;
-
-      toast.classList.add("show");
-
-      clearTimeout(toastTimeout);
-
-      toastTimeout = setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      }, 2200);
-
-    }
-
-
-    /* ============================================================
-       INITIALISE
-    ============================================================ */
-
-    loadProgress();
-
-  </script>
-
+        function updateScrollIndicator() {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            if (maxScroll <= 0) {
+                scrollIndicator.style.width = '100%';
+                return;
+            }
+            const scrollPercent = (carousel.scrollLeft / maxScroll) * 100;
+            scrollIndicator.style.width = `${Math.min(100, Math.max(10, scrollPercent))}%`;
+        }
+
+        /* ==========================================================================
+           8. MODAL & CLIPBOARD LOGIC
+           ========================================================================== */
+        window.openModal = function(id) {
+            const topic = topics.find(t => t.id === id);
+            if (!topic) return;
+
+            modalTitle.textContent = `${String(topic.id).padStart(2, '0')}. ${topic.title}`;
+            modalPromptText.textContent = topic.prompt;
+            activePromptText = topic.prompt;
+
+            promptModal.classList.add('active');
+            promptModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+        };
+
+        function closeModal() {
+            promptModal.classList.remove('active');
+            promptModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalCloseBtn.addEventListener('click', closeModal);
+        promptModal.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && promptModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        modalCopyBtn.addEventListener('click', () => {
+            if (!activePromptText) return;
+            navigator.clipboard.writeText(activePromptText).then(() => {
+                showToast('✓ Prompt copied to clipboard');
+            }).catch(() => {
+                // Fallback for clipboard API block
+                const textArea = document.createElement("textarea");
+                textArea.value = activePromptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('✓ Prompt copied');
+                } catch (err) {
+                    showToast('Failed to copy prompt');
+                }
+                document.body.removeChild(textArea);
+            });
+        });
+
+        /* ==========================================================================
+           9. TOAST NOTIFICATIONS
+           ========================================================================== */
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <span class="toast-icon">✓</span>
+                <span>${message}</span>
+            `;
+            toastContainer.appendChild(toast);
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                toast.classList.add('show');
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        /* ==========================================================================
+           10. INITIALIZATION
+           ========================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards();
+            updateProgressUI();
+            window.addEventListener('resize', () => {
+                updateCarouselButtons();
+                updateScrollIndicator();
+            });
+        });
+    </script>
 </body>
 </html>
