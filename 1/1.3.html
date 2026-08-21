@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1.2 AI Prompt Engineering for Learning - AreWeCooked?</title>
+    <title>1.3 Pattern problems</title>
     <style>
         /* ==========================================================================
            1. DESIGN SYSTEM & CSS VARIABLES
@@ -771,16 +771,16 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 Back to Roadmap
             </a>
-            <span class="module-badge">MODULE 1.2</span>
+            <span class="module-badge">MODULE 1.3</span>
         </nav>
 
         <!-- HERO & PROGRESS -->
         <header class="hero">
             <div>
                 <div class="hero-eyebrow">AI LEARNING MODULE</div>
-                <h1 class="hero-title">Learn smarter. Not harder.</h1>
+                <h1 class="hero-title">Pattern problems</h1>
                 <p class="hero-desc">
-                    Master programming & DSA logic using structured AI prompts. Designed for C++, Java, and Python learners to trigger Socratic reasoning, deep debugging, and active recall.
+                    Build strong loop and logic skills by learning how to break visual patterns into rows, spaces, and elements. Practice everything from basic stars and numbers to pyramids, diamonds, hollow, symmetric, and unfamiliar patterns.
                 </p>
             </div>
             
@@ -862,213 +862,359 @@
         const topics = [
             {
                 id: 1,
-                title: "Concept Explanation & Foundations",
-                desc: "Get crystal clear explanations tailored to your language without jargon overload.",
-                tags: ["Concept", "Beginner", "Multi-Lang"],
-                prompt: `Act as a patient, world-class programming tutor. I want to understand the concept of [INSERT TOPIC, e.g., Pointers / References / Recursion].
+                title: "Pattern Fundamentals",
+                desc: "Learn how to break any pattern into rows, columns, spaces, and symbols before writing code. Build the foundation for using nested loops and turning a visual pattern into clear programming logic.",
+                tags: ["Nested Loops", "Pattern Logic", "Problem Analysis"],
+                prompt: `You are my personal programming tutor.
 
-First, ask me which language I am using (C++, Java, or Python).
-Once I tell you, explain the concept using:
-1. A relatable real-world analogy.
-2. A simple code example in my chosen language with inline comments.
-3. A visual step-by-step memory/execution layout.
+Teach me Pattern Fundamentals in the programming language I am currently learning.
 
-Do NOT give me advanced edge cases yet. End your response by asking me a quick 1-sentence diagnostic question to test if I understood the core idea.`
+I want to understand how to look at a visual pattern, break it into smaller rules, and convert those rules into programming logic using loops.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about pattern problems and nested loops.
+2. Explain how a pattern can be analyzed using:
+   - Rows
+   - Columns
+   - Spaces
+   - Symbols or characters
+3. Teach me how to determine what changes from one row to the next.
+4. Explain how nested loops are used to control rows and what gets printed inside each row.
+5. Start with very simple patterns such as a rectangle or square.
+6. Then gradually introduce a basic increasing pattern and make me figure out how the number of printed elements changes in each row.
+7. Before showing code, ask me to describe the pattern's logic in plain English.
+8. Give me a pattern and ask me to identify:
+   - Number of rows
+   - Number of elements in each row
+   - Number of spaces
+   - What should be printed
+   - How each part changes
+9. Make me predict the output of short pattern programs before revealing the answer.
+10. Show common beginner mistakes involving nested loops, loop limits, spaces, and incorrect row/column relationships.
+11. Give me small pattern exercises and let me write the logic and code myself.
+12. Do not immediately give me the solution. Give hints progressively if I get stuck.
+13. Gradually increase the difficulty while making sure I understand the logic behind each pattern.
+14. When the language I am learning has different syntax for loops or printing, use the correct syntax for that language.
+15. Do not make me memorize pattern code. Teach me how to derive the code from the pattern.
+
+Use this approach whenever I get a new pattern:
+
+Observe → Break into rows → Analyze spaces → Analyze elements → Find the changing rule → Build the loops → Code → Dry run → Verify
+
+At the end, give me:
+- 5 quick concept questions
+- 3 pattern-analysis questions
+- 3 small pattern-coding problems
+
+Do not reveal the solutions immediately. Let me attempt them first and give hints when needed.
+
+The goal is to make me capable of looking at an unfamiliar pattern and figuring out the programming logic myself.
+
+Keep the lesson practical, visual, beginner-friendly, and progressively challenging. Avoid unnecessary theory.`
             },
             {
                 id: 2,
-                title: "Socratic Method Learning",
-                desc: "Guided discovery that forces you to think through logic instead of giving answers.",
-                tags: ["Socratic", "Logic", "Interactive"],
-                prompt: `Act as a Socratic programming tutor. I want to learn how to solve [INSERT PROBLEM/CONCEPT, e.g., Reversing a Linked List].
+                title: "Pattern Types & Problem Solving",
+                desc: "Explore different pattern families—from stars and numbers to pyramids, diamonds, hollow and symmetric designs—and learn how to derive their logic. Practice turning unfamiliar patterns into the right combination of loops, spaces, and conditions.",
+                tags: ["Pattern Types", "Nested Loops", "Logic Building"],
+                prompt: `You are my personal programming and DSA tutor.
 
-Rules for your behavior:
-1. Do NOT give me the solution or full code straight away.
-2. Guide me by asking ONE targeted question at a time to lead me to the discovery.
-3. Wait for my answer before moving to the next step.
-4. If I answer wrong, gently point out where my logic breaks and ask a simpler leading question.
+Teach me Pattern Problems in the programming language I am currently learning.
 
-Let's begin. Ask me your first question about [INSERT TOPIC].`
+The goal is NOT to make me memorize pattern codes. I want to become capable of looking at a new pattern, understanding its structure, deriving the logic, and writing the solution myself.
+
+Teach me interactively and progressively.
+
+Start by giving me simple patterns and gradually move toward difficult and unfamiliar ones.
+
+Cover the major pattern families, including:
+
+- Squares
+- Rectangles
+- Increasing triangles
+- Decreasing triangles
+- Right-aligned patterns
+- Pyramids
+- Inverted pyramids
+- Diamonds
+- Hollow patterns
+- Number patterns
+- Repeated-number patterns
+- Increasing-number patterns
+- Alphabet and character patterns
+- Symmetric patterns
+- Patterns involving spaces
+- Mixed star, number, and character patterns
+- Patterns with multiple sections
+- More complex nested-loop patterns
+
+For every new pattern, follow this process:
+
+1. Show me the pattern clearly.
+2. Ask me to observe it before explaining anything.
+3. Ask me how many rows it has.
+4. Make me identify what changes from row to row.
+5. Make me calculate the number of spaces and printed elements for different rows.
+6. Ask me to describe the pattern's rules in plain English.
+7. Make me identify which nested loops or conditions might be needed.
+8. Ask me to write the logic or pseudocode before writing code.
+9. Let me attempt the code myself.
+10. Make me dry-run my solution with a small input.
+11. Check my solution and explain exactly what is correct or incorrect.
+12. If I am stuck, give hints progressively instead of immediately giving the solution.
+
+Use this hint system:
+
+Hint 1 → Ask a guiding question.
+
+Hint 2 → Point me toward the part of the pattern I should analyze.
+
+Hint 3 → Help me identify the row/space/element relationship.
+
+Hint 4 → Give me the loop structure idea without giving the complete code.
+
+Only reveal the complete solution after I have genuinely attempted it or explicitly ask for it.
+
+Make the difficulty progress through stages:
+
+Stage 1:
+Simple squares, rectangles, and basic triangles.
+
+Stage 2:
+Increasing/decreasing patterns, right-aligned patterns, and basic number patterns.
+
+Stage 3:
+Pyramids, inverted pyramids, spaces, and symmetric patterns.
+
+Stage 4:
+Diamonds, hollow patterns, alphabet patterns, and mixed patterns.
+
+Stage 5:
+Unfamiliar and complex patterns where I must derive the logic myself.
+
+Do not just give me one example of each pattern. Give me multiple variations so I learn the underlying logic rather than memorizing a specific solution.
+
+For every pattern, teach me to think in terms of:
+
+Rows → Spaces → Elements → What changes → Mathematical relationship → Loop structure → Conditions → Code
+
+Also challenge me with variations such as:
+
+- "What happens if the number of rows changes?"
+- "Can you reverse this pattern?"
+- "Can you make it hollow?"
+- "Can you replace stars with numbers?"
+- "Can you make the pattern symmetric?"
+- "Can you combine two patterns?"
+- "Can you solve the same pattern using a different approach?"
+
+Include code-output prediction challenges where I have to look at a pattern program and determine what it prints without executing it.
+
+Include debugging challenges where you give me an almost-correct pattern program containing a logical mistake and make me find and fix it.
+
+Do not focus heavily on syntax. If I make a syntax mistake, briefly correct it, but focus mainly on whether my logic correctly produces the required pattern.
+
+At the end of each learning session:
+
+- Give me 3 pattern-analysis challenges.
+- Give me 2 code-tracing challenges.
+- Give me 3 pattern-coding problems.
+- Give me 1 unfamiliar pattern that tests whether I can derive the logic independently.
+
+Do not reveal the solutions immediately.
+
+Evaluate my answers and tell me:
+- What I understood correctly
+- Where my logic went wrong
+- What pattern relationship I missed
+- How I can approach similar patterns next time
+
+Keep increasing the difficulty as I improve.
+
+The final goal is that when I see a completely new pattern, I should be able to analyze it, derive the row/space/element relationships, construct the nested loops, and code it without copying a solution.`
             },
-            {
-                id: 3,
-                title: "Active Recall & Self-Testing",
-                desc: "Test your retention and understanding through dynamic rapid-fire quizzing.",
-                tags: ["Quiz", "Active Recall", "Memory"],
-                prompt: `Act as an interviewer testing my knowledge on [INSERT TOPIC, e.g., Hash Tables & Collisions].
 
-Ask me 3 short active-recall questions, ONE AT A TIME.
-- Question 1: Fundamental concept.
-- Question 2: Time/Space complexity analysis.
-- Question 3: Trade-offs or scenarios where this structure fails.
 
-Wait for my response after each question. Grade my response on a scale of 1-5, explain any missed nuances, and then ask the next question.`
-            },
-            {
-                id: 4,
-                title: "Code Execution Prediction",
-                desc: "Train your mind to act like a compiler/interpreter by predicting output.",
-                tags: ["Tracing", "Code Analysis", "Practice"],
-                prompt: `Act as a code analysis coach. Create a tricky, short code snippet in my choice of language (C++, Java, or Python) involving [INSERT TOPIC, e.g., Pass-by-value vs Pass-by-reference / Scope / Loop invariants].
+//             {
+//                 id: 3,
+//                 title: "Active Recall & Self-Testing",
+//                 desc: "Test your retention and understanding through dynamic rapid-fire quizzing.",
+//                 tags: ["Quiz", "Active Recall", "Memory"],
+//                 prompt: `Act as an interviewer testing my knowledge on [INSERT TOPIC, e.g., Hash Tables & Collisions].
 
-Do NOT show me the output. 
-Ask me to:
-1. Trace the code step-by-step.
-2. Predict the exact terminal output.
-3. Explain what state variables hold at key checkpoints.
+// Ask me 3 short active-recall questions, ONE AT A TIME.
+// - Question 1: Fundamental concept.
+// - Question 2: Time/Space complexity analysis.
+// - Question 3: Trade-offs or scenarios where this structure fails.
 
-Wait for my response before telling me if I am right or wrong.`
-            },
-            {
-                id: 5,
-                title: "Interactive Bug Hunting",
-                desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
-                tags: ["Debugging", "Edge Cases", "Analysis"],
-                prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
+// Wait for my response after each question. Grade my response on a scale of 1-5, explain any missed nuances, and then ask the next question.`
+//             },
+//             {
+//                 id: 4,
+//                 title: "Code Execution Prediction",
+//                 desc: "Train your mind to act like a compiler/interpreter by predicting output.",
+//                 tags: ["Tracing", "Code Analysis", "Practice"],
+//                 prompt: `Act as a code analysis coach. Create a tricky, short code snippet in my choice of language (C++, Java, or Python) involving [INSERT TOPIC, e.g., Pass-by-value vs Pass-by-reference / Scope / Loop invariants].
 
-Write the code in C++, Java, or Python.
-Do NOT reveal what the bugs are.
-Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
+// Do NOT show me the output. 
+// Ask me to:
+// 1. Trace the code step-by-step.
+// 2. Predict the exact terminal output.
+// 3. Explain what state variables hold at key checkpoints.
 
-Wait for my response before evaluating my debug analysis.`
-            },
-            {
-                id: 6,
-                title: "Common Pitfalls & Anti-Patterns",
-                desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
-                tags: ["Best Practices", "Pitfalls", "Clean Code"],
-                prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
+// Wait for my response before telling me if I am right or wrong.`
+//             },
+//             {
+//                 id: 5,
+//                 title: "Interactive Bug Hunting",
+//                 desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
+//                 tags: ["Debugging", "Edge Cases", "Analysis"],
+//                 prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
 
-For each mistake:
-1. Show the "bad" pattern code snippet.
-2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
-3. Show the refactored "good" pattern.
+// Write the code in C++, Java, or Python.
+// Do NOT reveal what the bugs are.
+// Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
 
-After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
-            },
-            {
-                id: 7,
-                title: "Real-World System Analogy",
-                desc: "Connect abstract data structures to actual production systems and software.",
-                tags: ["Analogy", "System Design", "Context"],
-                prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
+// Wait for my response before evaluating my debug analysis.`
+//             },
+//             {
+//                 id: 6,
+//                 title: "Common Pitfalls & Anti-Patterns",
+//                 desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
+//                 tags: ["Best Practices", "Pitfalls", "Clean Code"],
+//                 prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
 
-Explain:
-1. How the data structure powers the actual feature.
-2. Why alternative structures would fail in this scenario.
-3. How this translates to code in C++, Java, or Python.
+// For each mistake:
+// 1. Show the "bad" pattern code snippet.
+// 2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
+// 3. Show the refactored "good" pattern.
 
-End by giving me a mini system requirement and asking me to choose the best data structure for it.`
-            },
-            {
-                id: 8,
-                title: "Step-by-Step Algorithm Builder",
-                desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
-                tags: ["Algorithms", "Step-by-Step", "Structure"],
-                prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
+// After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
+//             },
+//             {
+//                 id: 7,
+//                 title: "Real-World System Analogy",
+//                 desc: "Connect abstract data structures to actual production systems and software.",
+//                 tags: ["Analogy", "System Design", "Context"],
+//                 prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
 
-Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
-Provide Phase 1 instructions and skeleton code only. 
-Ask me to fill in the missing logic for Phase 1.
+// Explain:
+// 1. How the data structure powers the actual feature.
+// 2. Why alternative structures would fail in this scenario.
+// 3. How this translates to code in C++, Java, or Python.
 
-Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
-            },
-            {
-                id: 9,
-                title: "Problem-Solving Strategy Breakdown",
-                desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
-                tags: ["Problem Solving", "Strategy", "LeetCode"],
-                prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
+// End by giving me a mini system requirement and asking me to choose the best data structure for it.`
+//             },
+//             {
+//                 id: 8,
+//                 title: "Step-by-Step Algorithm Builder",
+//                 desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
+//                 tags: ["Algorithms", "Step-by-Step", "Structure"],
+//                 prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
 
-Teach me the mental framework to recognize when to apply this technique.
-1. What pattern keywords in a problem description signal this pattern?
-2. What are the standard state variables needed?
-3. What is the boilerplate template in C++, Java, and Python?
+// Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
+// Provide Phase 1 instructions and skeleton code only. 
+// Ask me to fill in the missing logic for Phase 1.
 
-Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
-            },
-            {
-                id: 10,
-                title: "DSA Deep Application & Trade-offs",
-                desc: "Compare Big-O time/space complexities across different implementations.",
-                tags: ["Complexity", "Big-O", "Performance"],
-                prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
+// Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
+//             },
+//             {
+//                 id: 9,
+//                 title: "Problem-Solving Strategy Breakdown",
+//                 desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
+//                 tags: ["Problem Solving", "Strategy", "LeetCode"],
+//                 prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
 
-Break down:
-1. Best-case, Average-case, and Worst-case time complexity with scenarios.
-2. Auxiliary space complexity.
-3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
+// Teach me the mental framework to recognize when to apply this technique.
+// 1. What pattern keywords in a problem description signal this pattern?
+// 2. What are the standard state variables needed?
+// 3. What is the boilerplate template in C++, Java, and Python?
 
-Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
-            },
-            {
-                id: 11,
-                title: "Edge Case & Boundary Stress Test",
-                desc: "Identify sneaky edge cases that break production code and pass test suites.",
-                tags: ["Edge Cases", "Testing", "Robustness"],
-                prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
+// Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
+//             },
+//             {
+//                 id: 10,
+//                 title: "DSA Deep Application & Trade-offs",
+//                 desc: "Compare Big-O time/space complexities across different implementations.",
+//                 tags: ["Complexity", "Big-O", "Performance"],
+//                 prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
 
-List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
+// Break down:
+// 1. Best-case, Average-case, and Worst-case time complexity with scenarios.
+// 2. Auxiliary space complexity.
+// 3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
 
-Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
-            },
-            {
-                id: 12,
-                title: "Comparative Analysis (X vs Y)",
-                desc: "Understand differences, trade-offs, and when to pick one tool over another.",
-                tags: ["Comparison", "Trade-offs", "Decision"],
-                prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
+// Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
+//             },
+//             {
+//                 id: 11,
+//                 title: "Edge Case & Boundary Stress Test",
+//                 desc: "Identify sneaky edge cases that break production code and pass test suites.",
+//                 tags: ["Edge Cases", "Testing", "Robustness"],
+//                 prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
 
-Compare them across:
-1. Core mechanism difference.
-2. Memory footprint comparison.
-3. Ideal use cases for Concept A vs Concept B.
-4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
+// List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
 
-Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
-            },
-            {
-                id: 13,
-                title: "Feynman Technique (Teach-Back)",
-                desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
-                tags: ["Feynman", "Teaching", "Mastery"],
-                prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
+// Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
+//             },
+//             {
+//                 id: 12,
+//                 title: "Comparative Analysis (X vs Y)",
+//                 desc: "Understand differences, trade-offs, and when to pick one tool over another.",
+//                 tags: ["Comparison", "Trade-offs", "Decision"],
+//                 prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
 
-Your role:
-1. Listen to my explanation.
-2. Call out any gaps, inaccuracies, or overly complex terms I used.
-3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
+// Compare them across:
+// 1. Core mechanism difference.
+// 2. Memory footprint comparison.
+// 3. Ideal use cases for Concept A vs Concept B.
+// 4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
 
-Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
-            },
-            {
-                id: 14,
-                title: "Progressive Difficulty Challenges",
-                desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
-                tags: ["Challenges", "Progression", "Practice"],
-                prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
+// Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
+//             },
+//             {
+//                 id: 13,
+//                 title: "Feynman Technique (Teach-Back)",
+//                 desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
+//                 tags: ["Feynman", "Teaching", "Mastery"],
+//                 prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
 
-Give me 3 problem descriptions in increasing difficulty:
-- Level 1: Easy (Warmup)
-- Level 2: Medium (Standard Interview)
-- Level 3: Hard (Advanced Application)
+// Your role:
+// 1. Listen to my explanation.
+// 2. Call out any gaps, inaccuracies, or overly complex terms I used.
+// 3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
 
-Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
-            },
-            {
-                id: 15,
-                title: "Comprehensive Final Assessment",
-                desc: "Validate your complete module mastery with a realistic evaluation test.",
-                tags: ["Assessment", "Evaluation", "Final Test"],
-                prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+// Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
+//             },
+//             {
+//                 id: 14,
+//                 title: "Progressive Difficulty Challenges",
+//                 desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
+//                 tags: ["Challenges", "Progression", "Practice"],
+//                 prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
 
-Provide a 3-part comprehensive assessment:
-1. Conceptual Multiple Choice (1 Question)
-2. Complexity Evaluation (1 Question)
-3. Code Implementation Task (1 Practical Problem)
+// Give me 3 problem descriptions in increasing difficulty:
+// - Level 1: Easy (Warmup)
+// - Level 2: Medium (Standard Interview)
+// - Level 3: Hard (Advanced Application)
 
-Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
-            }
+// Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
+//             },
+//             {
+//                 id: 15,
+//                 title: "Comprehensive Final Assessment",
+//                 desc: "Validate your complete module mastery with a realistic evaluation test.",
+//                 tags: ["Assessment", "Evaluation", "Final Test"],
+//                 prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+
+// Provide a 3-part comprehensive assessment:
+// 1. Conceptual Multiple Choice (1 Question)
+// 2. Complexity Evaluation (1 Question)
+// 3. Code Implementation Task (1 Practical Problem)
+
+// Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
+//             }
         ];
 
         /* ==========================================================================
@@ -1194,7 +1340,7 @@ Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give
         };
 
         btnReset.addEventListener('click', () => {
-            if (confirm("Are you sure you want to reset your progress for Module 1.2?")) {
+            if (confirm("Are you sure you want to reset your progress for Module 1.3?")) {
                 learnedState = {};
                 saveProgress();
                 renderCards(getFilteredTopics());
