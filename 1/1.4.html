@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1.2 AI Prompt Engineering for Learning - AreWeCooked?</title>
+    <title>1.4 STL / Collections & Built-in Tools</title>
     <style>
         /* ==========================================================================
            1. DESIGN SYSTEM & CSS VARIABLES
@@ -771,16 +771,16 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                 Back to Roadmap
             </a>
-            <span class="module-badge">MODULE 1.2</span>
+            <span class="module-badge">MODULE 1.4</span>
         </nav>
 
         <!-- HERO & PROGRESS -->
         <header class="hero">
             <div>
                 <div class="hero-eyebrow">AI LEARNING MODULE</div>
-                <h1 class="hero-title">Learn smarter. Not harder.</h1>
+                <h1 class="hero-title">STL / Collections & Built-in Tools</h1>
                 <p class="hero-desc">
-                    Master programming & DSA logic using structured AI prompts. Designed for C++, Java, and Python learners to trigger Socratic reasoning, deep debugging, and active recall.
+                    Learn the powerful built-in data structures and utilities provided by your programming language. Understand what to use, when to use it, and how these tools make solving DSA problems faster and cleaner.
                 </p>
             </div>
             
@@ -862,213 +862,388 @@
         const topics = [
             {
                 id: 1,
-                title: "Concept Explanation & Foundations",
-                desc: "Get crystal clear explanations tailored to your language without jargon overload.",
-                tags: ["Concept", "Beginner", "Multi-Lang"],
-                prompt: `Act as a patient, world-class programming tutor. I want to understand the concept of [INSERT TOPIC, e.g., Pointers / References / Recursion].
+                title: "Containers & Data Structures",
+                desc: "Learn the built-in containers and basic data structures provided by C++, Java, Python, and similar languages. Understand what each one stores, how it works, and when to choose it while solving DSA problems.",
+                tags: ["Containers", "Collections", "Data Structures"],
+                prompt: `You are my personal programming and DSA tutor.
 
-First, ask me which language I am using (C++, Java, or Python).
-Once I tell you, explain the concept using:
-1. A relatable real-world analogy.
-2. A simple code example in my chosen language with inline comments.
-3. A visual step-by-step memory/execution layout.
+Teach me Containers and Data Structures in the programming language I am currently learning.
 
-Do NOT give me advanced edge cases yet. End your response by asking me a quick 1-sentence diagnostic question to test if I understood the core idea.`
+I want to understand the built-in collections provided by my language, what they are used for, how they work, and most importantly, when I should choose one over another.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about built-in collections or data structures.
+2. Explain why programming languages provide ready-made containers and why they are useful in DSA.
+3. Teach the important containers available in my language, including their closest equivalents when relevant:
+   - C++: vector, array, deque, stack, queue, set, unordered_set, map, unordered_map
+   - Java: ArrayList, LinkedList, Stack or Deque, Queue, HashSet, TreeSet, HashMap, TreeMap
+   - Python: list, tuple, deque, set, dict
+4. Do not force me to learn every container at once. Introduce them progressively based on their purpose.
+5. For each container, explain:
+   - What it stores
+   - How elements are accessed
+   - How elements are added and removed
+   - Whether duplicates are allowed
+   - Whether elements are ordered
+   - Whether indexing is available
+   - Common operations
+   - When it is useful in DSA
+6. Show small practical examples in the language I am learning.
+7. Explain the important operations through code and let me predict the result before revealing it.
+8. Compare similar containers and make me decide which one should be used for a given situation.
+9. Introduce time complexity for common operations when it is important, but keep it beginner-friendly.
+10. Show common beginner mistakes and explain why they happen.
+11. Give me small exercises where I have to choose an appropriate container before writing code.
+12. Do not immediately give me the answer. Ask me to explain my reasoning first and give hints if I am stuck.
+13. Gradually move from basic usage to small DSA problems using these containers.
+14. When the same concept has different names or behavior in C++, Java, and Python, clearly explain the equivalent rather than assuming they work exactly the same way.
+15. Explain when using a built-in container is better than manually implementing the same structure.
+
+Use this learning approach:
+
+Understand the purpose → Learn the container → Learn its operations → Compare alternatives → Understand complexity → Apply it to a DSA problem.
+
+At the end, test me with:
+- 5 concept questions
+- 3 container-selection questions
+- 3 code-output questions
+- 3 small DSA problems using containers
+
+Do not reveal solutions immediately. Let me attempt them first and give progressive hints.
+
+After evaluating my answers, tell me:
+- Which containers I understand
+- Which ones I should revise
+- Whether I am choosing containers appropriately
+- What I should learn next
+
+The goal is not to memorize the names of collections. I should be able to look at a DSA problem, understand what operations I need, and choose an appropriate built-in container myself.
+
+Keep the lesson practical, interactive, beginner-friendly, and progressively challenging.`
             },
             {
                 id: 2,
-                title: "Socratic Method Learning",
+                title: "Operations, Iteration & Built-in Methods",
                 desc: "Guided discovery that forces you to think through logic instead of giving answers.",
-                tags: ["Socratic", "Logic", "Interactive"],
-                prompt: `Act as a Socratic programming tutor. I want to learn how to solve [INSERT PROBLEM/CONCEPT, e.g., Reversing a Linked List].
+                tags: ["Methods", "Iteration", "Operations"],
+                prompt: `You are my personal programming and DSA tutor.
 
-Rules for your behavior:
-1. Do NOT give me the solution or full code straight away.
-2. Guide me by asking ONE targeted question at a time to lead me to the discovery.
-3. Wait for my answer before moving to the next step.
-4. If I answer wrong, gently point out where my logic breaks and ask a simpler leading question.
+Teach me Operations, Iteration, and Built-in Methods for the collections available in the programming language I am currently learning.
 
-Let's begin. Ask me your first question about [INSERT TOPIC].`
+I want to learn how to actually work with collections efficiently instead of memorizing a list of methods.
+
+Teach me interactively, not like a textbook.
+
+1. First ask me what I already know about collection operations and iteration.
+2. Explain why common built-in operations are useful when solving DSA problems.
+3. Teach me the most important operations for the collections I have learned, such as:
+   - Adding elements
+   - Removing elements
+   - Accessing elements
+   - Updating elements
+   - Searching
+   - Checking whether an element exists
+   - Finding size or length
+   - Traversing elements
+   - Sorting
+   - Reversing where supported
+   - Clearing a collection
+4. Teach me how to iterate through collections using the appropriate loops or iteration tools for my language.
+5. Explain the difference between index-based iteration and directly iterating over elements when both are available.
+6. Show the important built-in methods and functions for my language, but focus on the ones that are genuinely useful in DSA.
+7. For each important operation, explain:
+   - What it does
+   - When to use it
+   - What it returns
+   - Whether it changes the collection
+   - Its basic time complexity when relevant
+8. Show small code examples and ask me to predict the result before revealing the answer.
+9. Give me situations where multiple operations can solve the same task and make me choose the most appropriate one.
+10. Compare equivalent operations across C++, Java, and Python when their syntax or behavior differs.
+11. Show common beginner mistakes, such as invalid indexes, modifying a collection incorrectly while iterating, using the wrong method, or misunderstanding what a method returns.
+12. Give me small exercises where I have to choose the correct operation or method before writing code.
+13. Do not immediately give me solutions. Give hints progressively if I get stuck.
+14. Gradually move from individual operations to combining multiple operations in small DSA problems.
+15. Teach me to think about time complexity before choosing a built-in operation when performance matters.
+
+Use this learning approach:
+
+Understand the operation → See it in code → Predict the result → Try it yourself → Understand complexity → Apply it to a DSA problem.
+
+At the end, test me with:
+- 5 concept questions
+- 5 "which operation/method would you use?" questions
+- 3 code-output prediction questions
+- 3 small DSA problems
+
+Do not reveal solutions immediately. Let me attempt them first and provide progressive hints.
+
+After evaluating my answers, tell me:
+- Which operations I understand
+- Which methods I should revise
+- Whether I am choosing appropriate operations
+- Whether I understand their basic time complexity
+- What I should practice next
+
+The goal is for me to look at a DSA problem and confidently choose the right built-in operation or iteration method instead of searching for syntax every time.
+
+Keep the lesson practical, interactive, beginner-friendly, and progressively challenging.`
             },
             {
                 id: 3,
-                title: "Active Recall & Self-Testing",
-                desc: "Test your retention and understanding through dynamic rapid-fire quizzing.",
-                tags: ["Quiz", "Active Recall", "Memory"],
-                prompt: `Act as an interviewer testing my knowledge on [INSERT TOPIC, e.g., Hash Tables & Collisions].
+                title: "Using Collections in DSA",
+                desc: "Learn how to choose the right collection based on the operations a DSA problem needs. Apply vectors, lists, stacks, queues, sets, maps, and their language-specific equivalents to real problem-solving.",
+                tags: ["DSA Applications", "Data Structure Selection", "Problem Solving"],
+                prompt: `You are my personal programming and DSA tutor.
 
-Ask me 3 short active-recall questions, ONE AT A TIME.
-- Question 1: Fundamental concept.
-- Question 2: Time/Space complexity analysis.
-- Question 3: Trade-offs or scenarios where this structure fails.
+Teach me how to use built-in collections effectively while solving DSA problems in the programming language I am currently learning.
 
-Wait for my response after each question. Grade my response on a scale of 1-5, explain any missed nuances, and then ask the next question.`
+The goal is not to memorize collection syntax. I want to learn how to look at a problem, identify what operations are needed, choose the right collection, and use it efficiently.
+
+Teach me interactively, not like a textbook.
+
+1. Start by giving me a simple DSA problem.
+2. Before allowing me to code, ask me:
+   - What does the problem require?
+   - What operations will I need?
+   - Do I need indexing?
+   - Do I need fast searching?
+   - Do I need unique elements?
+   - Do I need key-value pairs?
+   - Do I need a particular order?
+   - Do I need FIFO or LIFO behavior?
+3. Make me choose a suitable collection before writing code.
+4. Ask me to explain why I chose it.
+5. Compare my choice with at least one alternative and explain the trade-offs.
+6. Once my approach is reasonable, let me implement the solution myself.
+7. Help me use the correct built-in operations and methods for the language I am learning.
+8. Make me think about the time complexity of important operations.
+9. Show how choosing the wrong collection can make an otherwise correct solution inefficient.
+10. Give me problems involving different collection types, such as:
+   - Dynamic arrays
+   - Stacks
+   - Queues
+   - Sets
+   - Maps / dictionaries
+   - Hash-based collections
+   - Ordered collections
+11. Gradually combine collections with loops, conditions, arrays, strings, and functions.
+12. Include problems where more than one collection could work and make me decide which approach is better.
+13. Include beginner-friendly DSA problems involving frequency counting, duplicate detection, searching, ordering, grouping, and maintaining elements efficiently.
+14. Do not immediately give me the solution. If I get stuck, use progressive hints.
+15. If the language I am learning has different collections or different behavior, teach me the correct equivalent rather than forcing another language's implementation.
+
+Use this problem-solving process:
+
+Understand the problem
+→ Identify required operations
+→ Choose a collection
+→ Explain why
+→ Estimate complexity
+→ Design the approach
+→ Code
+→ Dry run
+→ Test edge cases
+→ Improve if necessary
+
+Use this hint system:
+
+Hint 1 → Ask me a guiding question.
+
+Hint 2 → Point me toward the operation I should think about.
+
+Hint 3 → Suggest the type of collection I should consider, without giving the full solution.
+
+Hint 4 → Help me construct the approach.
+
+Only reveal the complete solution after I have genuinely attempted the problem or explicitly ask for it.
+
+At the end of each session, give me:
+- 3 collection-selection questions
+- 2 code-tracing questions
+- 3 DSA problems
+- 1 challenge where I must choose between multiple possible collections
+
+Evaluate my answers and tell me:
+- Whether I chose the right collection
+- Whether my reasoning was correct
+- Whether my complexity analysis was correct
+- What alternative approaches exist
+- What I should practice next
+
+The goal is that when I encounter a DSA problem, I can independently decide which built-in collection will make the solution simpler and more efficient.
+
+Keep the lesson practical, interactive, progressively difficult, and focused on problem-solving rather than memorizing syntax.`
             },
-            {
-                id: 4,
-                title: "Code Execution Prediction",
-                desc: "Train your mind to act like a compiler/interpreter by predicting output.",
-                tags: ["Tracing", "Code Analysis", "Practice"],
-                prompt: `Act as a code analysis coach. Create a tricky, short code snippet in my choice of language (C++, Java, or Python) involving [INSERT TOPIC, e.g., Pass-by-value vs Pass-by-reference / Scope / Loop invariants].
 
-Do NOT show me the output. 
-Ask me to:
-1. Trace the code step-by-step.
-2. Predict the exact terminal output.
-3. Explain what state variables hold at key checkpoints.
 
-Wait for my response before telling me if I am right or wrong.`
-            },
-            {
-                id: 5,
-                title: "Interactive Bug Hunting",
-                desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
-                tags: ["Debugging", "Edge Cases", "Analysis"],
-                prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
 
-Write the code in C++, Java, or Python.
-Do NOT reveal what the bugs are.
-Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
+//             {
+//                 id: 4,
+//                 title: "Code Execution Prediction",
+//                 desc: "Train your mind to act like a compiler/interpreter by predicting output.",
+//                 tags: ["Tracing", "Code Analysis", "Practice"],
+//                 prompt: `Act as a code analysis coach. Create a tricky, short code snippet in my choice of language (C++, Java, or Python) involving [INSERT TOPIC, e.g., Pass-by-value vs Pass-by-reference / Scope / Loop invariants].
 
-Wait for my response before evaluating my debug analysis.`
-            },
-            {
-                id: 6,
-                title: "Common Pitfalls & Anti-Patterns",
-                desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
-                tags: ["Best Practices", "Pitfalls", "Clean Code"],
-                prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
+// Do NOT show me the output. 
+// Ask me to:
+// 1. Trace the code step-by-step.
+// 2. Predict the exact terminal output.
+// 3. Explain what state variables hold at key checkpoints.
 
-For each mistake:
-1. Show the "bad" pattern code snippet.
-2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
-3. Show the refactored "good" pattern.
+// Wait for my response before telling me if I am right or wrong.`
+//             },
+//             {
+//                 id: 5,
+//                 title: "Interactive Bug Hunting",
+//                 desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
+//                 tags: ["Debugging", "Edge Cases", "Analysis"],
+//                 prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
 
-After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
-            },
-            {
-                id: 7,
-                title: "Real-World System Analogy",
-                desc: "Connect abstract data structures to actual production systems and software.",
-                tags: ["Analogy", "System Design", "Context"],
-                prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
+// Write the code in C++, Java, or Python.
+// Do NOT reveal what the bugs are.
+// Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
 
-Explain:
-1. How the data structure powers the actual feature.
-2. Why alternative structures would fail in this scenario.
-3. How this translates to code in C++, Java, or Python.
+// Wait for my response before evaluating my debug analysis.`
+//             },
+//             {
+//                 id: 6,
+//                 title: "Common Pitfalls & Anti-Patterns",
+//                 desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
+//                 tags: ["Best Practices", "Pitfalls", "Clean Code"],
+//                 prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
 
-End by giving me a mini system requirement and asking me to choose the best data structure for it.`
-            },
-            {
-                id: 8,
-                title: "Step-by-Step Algorithm Builder",
-                desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
-                tags: ["Algorithms", "Step-by-Step", "Structure"],
-                prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
+// For each mistake:
+// 1. Show the "bad" pattern code snippet.
+// 2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
+// 3. Show the refactored "good" pattern.
 
-Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
-Provide Phase 1 instructions and skeleton code only. 
-Ask me to fill in the missing logic for Phase 1.
+// After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
+//             },
+//             {
+//                 id: 7,
+//                 title: "Real-World System Analogy",
+//                 desc: "Connect abstract data structures to actual production systems and software.",
+//                 tags: ["Analogy", "System Design", "Context"],
+//                 prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
 
-Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
-            },
-            {
-                id: 9,
-                title: "Problem-Solving Strategy Breakdown",
-                desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
-                tags: ["Problem Solving", "Strategy", "LeetCode"],
-                prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
+// Explain:
+// 1. How the data structure powers the actual feature.
+// 2. Why alternative structures would fail in this scenario.
+// 3. How this translates to code in C++, Java, or Python.
 
-Teach me the mental framework to recognize when to apply this technique.
-1. What pattern keywords in a problem description signal this pattern?
-2. What are the standard state variables needed?
-3. What is the boilerplate template in C++, Java, and Python?
+// End by giving me a mini system requirement and asking me to choose the best data structure for it.`
+//             },
+//             {
+//                 id: 8,
+//                 title: "Step-by-Step Algorithm Builder",
+//                 desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
+//                 tags: ["Algorithms", "Step-by-Step", "Structure"],
+//                 prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
 
-Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
-            },
-            {
-                id: 10,
-                title: "DSA Deep Application & Trade-offs",
-                desc: "Compare Big-O time/space complexities across different implementations.",
-                tags: ["Complexity", "Big-O", "Performance"],
-                prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
+// Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
+// Provide Phase 1 instructions and skeleton code only. 
+// Ask me to fill in the missing logic for Phase 1.
 
-Break down:
-1. Best-case, Average-case, and Worst-case time complexity with scenarios.
-2. Auxiliary space complexity.
-3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
+// Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
+//             },
+//             {
+//                 id: 9,
+//                 title: "Problem-Solving Strategy Breakdown",
+//                 desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
+//                 tags: ["Problem Solving", "Strategy", "LeetCode"],
+//                 prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
 
-Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
-            },
-            {
-                id: 11,
-                title: "Edge Case & Boundary Stress Test",
-                desc: "Identify sneaky edge cases that break production code and pass test suites.",
-                tags: ["Edge Cases", "Testing", "Robustness"],
-                prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
+// Teach me the mental framework to recognize when to apply this technique.
+// 1. What pattern keywords in a problem description signal this pattern?
+// 2. What are the standard state variables needed?
+// 3. What is the boilerplate template in C++, Java, and Python?
 
-List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
+// Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
+//             },
+//             {
+//                 id: 10,
+//                 title: "DSA Deep Application & Trade-offs",
+//                 desc: "Compare Big-O time/space complexities across different implementations.",
+//                 tags: ["Complexity", "Big-O", "Performance"],
+//                 prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
 
-Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
-            },
-            {
-                id: 12,
-                title: "Comparative Analysis (X vs Y)",
-                desc: "Understand differences, trade-offs, and when to pick one tool over another.",
-                tags: ["Comparison", "Trade-offs", "Decision"],
-                prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
+// Break down:
+// 1. Best-case, Average-case, and Worst-case time complexity with scenarios.
+// 2. Auxiliary space complexity.
+// 3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
 
-Compare them across:
-1. Core mechanism difference.
-2. Memory footprint comparison.
-3. Ideal use cases for Concept A vs Concept B.
-4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
+// Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
+//             },
+//             {
+//                 id: 11,
+//                 title: "Edge Case & Boundary Stress Test",
+//                 desc: "Identify sneaky edge cases that break production code and pass test suites.",
+//                 tags: ["Edge Cases", "Testing", "Robustness"],
+//                 prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
 
-Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
-            },
-            {
-                id: 13,
-                title: "Feynman Technique (Teach-Back)",
-                desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
-                tags: ["Feynman", "Teaching", "Mastery"],
-                prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
+// List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
 
-Your role:
-1. Listen to my explanation.
-2. Call out any gaps, inaccuracies, or overly complex terms I used.
-3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
+// Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
+//             },
+//             {
+//                 id: 12,
+//                 title: "Comparative Analysis (X vs Y)",
+//                 desc: "Understand differences, trade-offs, and when to pick one tool over another.",
+//                 tags: ["Comparison", "Trade-offs", "Decision"],
+//                 prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
 
-Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
-            },
-            {
-                id: 14,
-                title: "Progressive Difficulty Challenges",
-                desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
-                tags: ["Challenges", "Progression", "Practice"],
-                prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
+// Compare them across:
+// 1. Core mechanism difference.
+// 2. Memory footprint comparison.
+// 3. Ideal use cases for Concept A vs Concept B.
+// 4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
 
-Give me 3 problem descriptions in increasing difficulty:
-- Level 1: Easy (Warmup)
-- Level 2: Medium (Standard Interview)
-- Level 3: Hard (Advanced Application)
+// Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
+//             },
+//             {
+//                 id: 13,
+//                 title: "Feynman Technique (Teach-Back)",
+//                 desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
+//                 tags: ["Feynman", "Teaching", "Mastery"],
+//                 prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
 
-Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
-            },
-            {
-                id: 15,
-                title: "Comprehensive Final Assessment",
-                desc: "Validate your complete module mastery with a realistic evaluation test.",
-                tags: ["Assessment", "Evaluation", "Final Test"],
-                prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+// Your role:
+// 1. Listen to my explanation.
+// 2. Call out any gaps, inaccuracies, or overly complex terms I used.
+// 3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
 
-Provide a 3-part comprehensive assessment:
-1. Conceptual Multiple Choice (1 Question)
-2. Complexity Evaluation (1 Question)
-3. Code Implementation Task (1 Practical Problem)
+// Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
+//             },
+//             {
+//                 id: 14,
+//                 title: "Progressive Difficulty Challenges",
+//                 desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
+//                 tags: ["Challenges", "Progression", "Practice"],
+//                 prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
 
-Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
-            }
+// Give me 3 problem descriptions in increasing difficulty:
+// - Level 1: Easy (Warmup)
+// - Level 2: Medium (Standard Interview)
+// - Level 3: Hard (Advanced Application)
+
+// Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
+//             },
+//             {
+//                 id: 15,
+//                 title: "Comprehensive Final Assessment",
+//                 desc: "Validate your complete module mastery with a realistic evaluation test.",
+//                 tags: ["Assessment", "Evaluation", "Final Test"],
+//                 prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+
+// Provide a 3-part comprehensive assessment:
+// 1. Conceptual Multiple Choice (1 Question)
+// 2. Complexity Evaluation (1 Question)
+// 3. Code Implementation Task (1 Practical Problem)
+
+// Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
+//             }
         ];
 
         /* ==========================================================================
@@ -1194,7 +1369,7 @@ Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give
         };
 
         btnReset.addEventListener('click', () => {
-            if (confirm("Are you sure you want to reset your progress for Module 1.2?")) {
+            if (confirm("Are you sure you want to reset your progress for Module 1.4?")) {
                 learnedState = {};
                 saveProgress();
                 renderCards(getFilteredTopics());
