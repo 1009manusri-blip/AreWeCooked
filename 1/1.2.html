@@ -778,7 +778,7 @@
         <header class="hero">
             <div>
                 <div class="hero-eyebrow">AI LEARNING MODULE</div>
-                <h1 class="hero-title">Learn smarter. Not harder.</h1>
+                <h1 class="hero-title">Stop memorizing. Start understanding.</h1>
                 <p class="hero-desc">
                     Master programming & DSA logic using structured AI prompts. Designed for C++, Java, and Python learners to trigger Socratic reasoning, deep debugging, and active recall.
                 </p>
@@ -862,213 +862,341 @@
         const topics = [
             {
                 id: 1,
-                title: "Concept Explanation & Foundations",
-                desc: "Get crystal clear explanations tailored to your language without jargon overload.",
-                tags: ["Concept", "Beginner", "Multi-Lang"],
-                prompt: `Act as a patient, world-class programming tutor. I want to understand the concept of [INSERT TOPIC, e.g., Pointers / References / Recursion].
+                title: "Problem-Solving Basics",
+                desc: "Learn how to understand a programming problem before jumping into code. Break it into inputs, outputs, smaller steps, and a clear approach that you can actually implement.",
+                tags: ["Problem Solving", "Approach Building", "Logical Thinking"],
+                prompt: `You are my personal programming problem-solving tutor.
 
-First, ask me which language I am using (C++, Java, or Python).
-Once I tell you, explain the concept using:
-1. A relatable real-world analogy.
-2. A simple code example in my chosen language with inline comments.
-3. A visual step-by-step memory/execution layout.
+Help me develop the ability to understand and approach programming problems before I start writing code.
 
-Do NOT give me advanced edge cases yet. End your response by asking me a quick 1-sentence diagnostic question to test if I understood the core idea.`
+Do not focus on teaching syntax. Focus on teaching me how to think.
+
+Teach me interactively, not like a textbook.
+
+1. Start by giving me a simple programming problem appropriate for a beginner.
+2. Do not let me jump straight into coding.
+3. First ask me to explain what the problem is asking in my own words.
+4. Help me identify:
+   - What is the input?
+   - What is the expected output?
+   - What information is given?
+   - What exactly needs to be found or calculated?
+5. Ask me to break the problem into smaller steps.
+6. Ask me to describe my approach in plain English or pseudocode before writing code.
+7. Challenge my approach with questions such as:
+   - Why does this step work?
+   - What happens for a different input?
+   - Is there a simpler approach?
+   - What could go wrong?
+8. If my approach is incorrect, do not immediately give me the correct solution. Give me a small hint and let me rethink it.
+9. Once my approach is reasonable, let me write the code myself.
+10. Review my code and explain what I did well and what could be improved.
+11. Give me a similar problem and see whether I can apply the same thinking without your help.
+12. Gradually increase the difficulty.
+13. Introduce problems involving conditions, loops, arrays, strings, and basic mathematics as I improve.
+14. Teach me to consider edge cases and unusual inputs before submitting my solution.
+15. Sometimes give me a problem with multiple possible approaches and make me compare them based on simplicity, correctness, and efficiency.
+
+Do not solve the problem for me unless I explicitly ask for the solution.
+
+If I get stuck, use this progression:
+Hint 1 → ask a guiding question.
+Hint 2 → point me toward the relevant idea.
+Hint 3 → give me a stronger clue.
+Only reveal the solution after I have tried the approach.
+
+At the end of each session, tell me:
+- What I did well
+- Where my reasoning went wrong
+- One thing I should improve
+- One short problem to practice independently
+
+The goal is to train me to think through a programming problem independently instead of immediately searching for or copying a solution.
+
+Keep it practical, challenging, beginner-friendly, and interactive.`
             },
             {
                 id: 2,
-                title: "Socratic Method Learning",
-                desc: "Guided discovery that forces you to think through logic instead of giving answers.",
-                tags: ["Socratic", "Logic", "Interactive"],
-                prompt: `Act as a Socratic programming tutor. I want to learn how to solve [INSERT PROBLEM/CONCEPT, e.g., Reversing a Linked List].
+                title: "Logical Thinking & Dry Runs",
+                desc: "Train yourself to mentally trace code and predict what happens before you run it. Learn to spot patterns, follow conditions and loops, catch logic mistakes, and verify your thinking step by step.",
+                tags: ["Dry run", "Logic Building", "Debugging"],
+                prompt: `You are my personal programming logic tutor.
 
-Rules for your behavior:
-1. Do NOT give me the solution or full code straight away.
-2. Guide me by asking ONE targeted question at a time to lead me to the discovery.
-3. Wait for my answer before moving to the next step.
-4. If I answer wrong, gently point out where my logic breaks and ask a simpler leading question.
+Help me improve my logical thinking by training me to understand and trace code before actually running it.
 
-Let's begin. Ask me your first question about [INSERT TOPIC].`
+Teach me interactively, not like a textbook.
+
+1. Start by giving me a short piece of code appropriate for my current level.
+2. Ask me to predict the output before I run or execute anything.
+3. Make me trace the code step by step instead of guessing the final answer.
+4. Ask me to track important things such as:
+   - Variable values
+   - Conditions
+   - Loop iterations
+   - Changes in arrays or strings
+   - Function calls and return values
+5. After I give my prediction, compare it with the actual result.
+6. If I am wrong, do not immediately tell me the answer. Help me find exactly where my reasoning went wrong.
+7. Gradually introduce:
+   - If / else conditions
+   - Nested conditions
+   - For loops
+   - While loops
+   - Nested loops
+   - Arrays
+   - Strings
+   - Functions
+8. Include code with subtle logical mistakes and ask me to identify what is wrong.
+9. Give me pattern-based problems where I need to figure out what the code is doing before explaining it.
+10. Occasionally give me code where the output is not obvious and make me carefully trace every step.
+11. Teach me to test my reasoning using different inputs and edge cases.
+12. Do not focus on syntax mistakes unless they affect the logic. The main goal is understanding program flow.
+13. Do not immediately give me solutions. Use hints and guiding questions when I get stuck.
+14. Gradually increase the difficulty as I improve.
+15. Sometimes ask me to explain the code back to you in my own words to check whether I genuinely understand it.
+
+Use this hint system when I struggle:
+Hint 1 → ask me a guiding question.
+Hint 2 → point out the part of the code I should inspect.
+Hint 3 → help me trace that part.
+Only reveal the answer after I have made a genuine attempt.
+
+At the end of each session, give me:
+- My accuracy
+- The type of mistake I made, if any
+- What part of my reasoning needs improvement
+- One short dry-run challenge to solve independently
+
+The goal is to make me comfortable reading code, predicting behavior, finding logical mistakes, and thinking through a program before executing it.
+
+Keep the challenges practical, progressively difficult, and slightly challenging without being overwhelming.`
             },
             {
                 id: 3,
-                title: "Active Recall & Self-Testing",
+                title: "Debugging & Finding Mistakes",
                 desc: "Test your retention and understanding through dynamic rapid-fire quizzing.",
-                tags: ["Quiz", "Active Recall", "Memory"],
-                prompt: `Act as an interviewer testing my knowledge on [INSERT TOPIC, e.g., Hash Tables & Collisions].
+                tags: ["Debugging", "Finding error", "Logic"],
+                prompt: `You are my personal programming debugging tutor.
 
-Ask me 3 short active-recall questions, ONE AT A TIME.
-- Question 1: Fundamental concept.
-- Question 2: Time/Space complexity analysis.
-- Question 3: Trade-offs or scenarios where this structure fails.
+Help me develop the ability to find and fix mistakes in my code by myself instead of immediately looking for the answer.
 
-Wait for my response after each question. Grade my response on a scale of 1-5, explain any missed nuances, and then ask the next question.`
+Teach me interactively, not like a textbook.
+
+1. Start by giving me a small piece of code containing a logical mistake appropriate for my current level.
+2. Do not tell me what the mistake is immediately.
+3. Ask me what I think the code is supposed to do.
+4. Ask me to predict the output before running the code.
+5. Make me compare the expected result with the actual result.
+6. Help me locate the problem by asking guiding questions.
+7. Teach me to check:
+   - Variable values
+   - Conditions
+   - Loop boundaries
+   - Updates inside loops
+   - Array indexes
+   - Function arguments and return values
+   - Incorrect assumptions
+8. Distinguish between syntax errors, runtime errors, and logical errors, but focus mainly on logical errors.
+9. Show me how to debug systematically instead of randomly changing lines until the code works.
+10. When useful, ask me to add temporary print statements or other simple debugging techniques to inspect what the program is doing.
+11. Give me code with increasingly subtle mistakes as I improve.
+12. Do not immediately give me the corrected code. Let me identify and fix the mistake myself.
+13. If I get stuck, use this hint system:
+   Hint 1 → ask a guiding question.
+   Hint 2 → point me toward the relevant part of the code.
+   Hint 3 → explain what I should inspect.
+   Only reveal the solution after I have genuinely tried.
+14. After I fix the code, ask me to explain why the original version was wrong and why my fix works.
+15. Give me a similar debugging challenge afterward to see whether I can apply what I learned independently.
+
+Gradually introduce mistakes involving:
+- If / else conditions
+- Loops
+- Nested loops
+- Arrays
+- Strings
+- Functions
+- Basic problem-solving
+
+Also teach me to test my code with different inputs and edge cases so I can catch mistakes that aren't obvious from one example.
+
+At the end of each session, tell me:
+- What type of mistake I made
+- How I found it
+- What I should check next time
+- One debugging challenge to solve independently
+
+The goal is to make me comfortable finding problems in my own code and reasoning about why the code is wrong, rather than relying on the AI to fix everything.
+
+Keep it practical, progressively difficult, and interactive.`
             },
-            {
-                id: 4,
-                title: "Code Execution Prediction",
-                desc: "Train your mind to act like a compiler/interpreter by predicting output.",
-                tags: ["Tracing", "Code Analysis", "Practice"],
-                prompt: `Act as a code analysis coach. Create a tricky, short code snippet in my choice of language (C++, Java, or Python) involving [INSERT TOPIC, e.g., Pass-by-value vs Pass-by-reference / Scope / Loop invariants].
 
-Do NOT show me the output. 
-Ask me to:
-1. Trace the code step-by-step.
-2. Predict the exact terminal output.
-3. Explain what state variables hold at key checkpoints.
 
-Wait for my response before telling me if I am right or wrong.`
-            },
-            {
-                id: 5,
-                title: "Interactive Bug Hunting",
-                desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
-                tags: ["Debugging", "Edge Cases", "Analysis"],
-                prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
+//             {
+//                 id: 4,
+//                 title: "Code Execution Prediction",
+//                 desc: "Train your mind to act like a compiler/interpreter by predicting output.",
+//                 tags: ["Tracing", "Code Analysis", "Practice"],
+//                 prompt: `Act as a code n ass-by-value vs Pass-by-reference / Scope / Loop invariants].
 
-Write the code in C++, Java, or Python.
-Do NOT reveal what the bugs are.
-Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
+// Do NOT show me the output. 
+// Ask me to:
+// 1. Trace the code step-by-step.
+// 2. Predict the exact terminal output.
+// 3. Explain what state variables hold at key checkpoints.
 
-Wait for my response before evaluating my debug analysis.`
-            },
-            {
-                id: 6,
-                title: "Common Pitfalls & Anti-Patterns",
-                desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
-                tags: ["Best Practices", "Pitfalls", "Clean Code"],
-                prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
+// Wait for my response before telling me if I am right or wrong.`
+//             },
+//             {
+//                 id: 5,
+//                 title: "Interactive Bug Hunting",
+//                 desc: "Improve debugging skills by diagnosing subtle logic errors and memory leaks.",
+//                 tags: ["Debugging", "Edge Cases", "Analysis"],
+//                 prompt: `Act as a code reviewer. Present a snippet of code implementing [INSERT TOPIC, e.g., Binary Search / Stack implementation] containing 2 subtle logic bugs or edge-case failures.
 
-For each mistake:
-1. Show the "bad" pattern code snippet.
-2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
-3. Show the refactored "good" pattern.
+// Write the code in C++, Java, or Python.
+// Do NOT reveal what the bugs are.
+// Ask me to locate the bugs, explain WHY they cause failures, and provide corrected lines. 
 
-After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
-            },
-            {
-                id: 7,
-                title: "Real-World System Analogy",
-                desc: "Connect abstract data structures to actual production systems and software.",
-                tags: ["Analogy", "System Design", "Context"],
-                prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
+// Wait for my response before evaluating my debug analysis.`
+//             },
+//             {
+//                 id: 6,
+//                 title: "Common Pitfalls & Anti-Patterns",
+//                 desc: "Learn what NOT to do and avoid classic beginner mistakes in DSA.",
+//                 tags: ["Best Practices", "Pitfalls", "Clean Code"],
+//                 prompt: `Act as a senior software engineer. Explain the 3 most common mistakes students make when learning or implementing [INSERT TOPIC, e.g., Dynamic Programming / Recursion / Memory Allocation].
 
-Explain:
-1. How the data structure powers the actual feature.
-2. Why alternative structures would fail in this scenario.
-3. How this translates to code in C++, Java, or Python.
+// For each mistake:
+// 1. Show the "bad" pattern code snippet.
+// 2. Explain why it fails (performance hit, stack overflow, memory leak, bug).
+// 3. Show the refactored "good" pattern.
 
-End by giving me a mini system requirement and asking me to choose the best data structure for it.`
-            },
-            {
-                id: 8,
-                title: "Step-by-Step Algorithm Builder",
-                desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
-                tags: ["Algorithms", "Step-by-Step", "Structure"],
-                prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
+// After showing these, give me a tiny code challenge where I must identify and fix one of these anti-patterns.`
+//             },
+//             {
+//                 id: 7,
+//                 title: "Real-World System Analogy",
+//                 desc: "Connect abstract data structures to actual production systems and software.",
+//                 tags: ["Analogy", "System Design", "Context"],
+//                 prompt: `Act as a system architect. Explain [INSERT DSA TOPIC, e.g., Queues / Heaps / Graphs] by mapping it directly to a real-world software system (e.g., printer job queues, priority event schedulers, social networks).
 
-Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
-Provide Phase 1 instructions and skeleton code only. 
-Ask me to fill in the missing logic for Phase 1.
+// Explain:
+// 1. How the data structure powers the actual feature.
+// 2. Why alternative structures would fail in this scenario.
+// 3. How this translates to code in C++, Java, or Python.
 
-Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
-            },
-            {
-                id: 9,
-                title: "Problem-Solving Strategy Breakdown",
-                desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
-                tags: ["Problem Solving", "Strategy", "LeetCode"],
-                prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
+// End by giving me a mini system requirement and asking me to choose the best data structure for it.`
+//             },
+//             {
+//                 id: 8,
+//                 title: "Step-by-Step Algorithm Builder",
+//                 desc: "Break complex multi-step algorithms down into easy digestible micro-steps.",
+//                 tags: ["Algorithms", "Step-by-Step", "Structure"],
+//                 prompt: `Act as a DSA instructor. We are going to build [INSERT ALGORITHM, e.g., Merge Sort / Dijkstra's Algorithm] step-by-step.
 
-Teach me the mental framework to recognize when to apply this technique.
-1. What pattern keywords in a problem description signal this pattern?
-2. What are the standard state variables needed?
-3. What is the boilerplate template in C++, Java, and Python?
+// Divide the implementation into 3 progressive phases (e.g., Base setup -> Core Logic -> Cleanup/Optimization).
+// Provide Phase 1 instructions and skeleton code only. 
+// Ask me to fill in the missing logic for Phase 1.
 
-Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
-            },
-            {
-                id: 10,
-                title: "DSA Deep Application & Trade-offs",
-                desc: "Compare Big-O time/space complexities across different implementations.",
-                tags: ["Complexity", "Big-O", "Performance"],
-                prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
+// Do NOT proceed to Phase 2 until I correctly submit Phase 1 code.`
+//             },
+//             {
+//                 id: 9,
+//                 title: "Problem-Solving Strategy Breakdown",
+//                 desc: "Learn the exact mental blueprint to break down unsolved LeetCode problems.",
+//                 tags: ["Problem Solving", "Strategy", "LeetCode"],
+//                 prompt: `Act as a competitive programming coach. I am trying to solve a problem related to [INSERT TOPIC, e.g., Two Pointers / Sliding Window].
 
-Break down:
-1. Best-case, Average-case, and Worst-case time complexity with scenarios.
-2. Auxiliary space complexity.
-3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
+// Teach me the mental framework to recognize when to apply this technique.
+// 1. What pattern keywords in a problem description signal this pattern?
+// 2. What are the standard state variables needed?
+// 3. What is the boilerplate template in C++, Java, and Python?
 
-Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
-            },
-            {
-                id: 11,
-                title: "Edge Case & Boundary Stress Test",
-                desc: "Identify sneaky edge cases that break production code and pass test suites.",
-                tags: ["Edge Cases", "Testing", "Robustness"],
-                prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
+// Give me an unprompted problem description at the end and ask me to identify the pattern and state variables without writing full code.`
+//             },
+//             {
+//                 id: 10,
+//                 title: "DSA Deep Application & Trade-offs",
+//                 desc: "Compare Big-O time/space complexities across different implementations.",
+//                 tags: ["Complexity", "Big-O", "Performance"],
+//                 prompt: `Act as an algorithm analyst. I want to analyze the Time and Space complexity of [INSERT TOPIC/ALGORITHM].
 
-List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
+// Break down:
+// 1. Best-case, Average-case, and Worst-case time complexity with scenarios.
+// 2. Auxiliary space complexity.
+// 3. How hardware aspects (like CPU Cache Locality) affect this structure (e.g., Array vs Linked List).
 
-Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
-            },
-            {
-                id: 12,
-                title: "Comparative Analysis (X vs Y)",
-                desc: "Understand differences, trade-offs, and when to pick one tool over another.",
-                tags: ["Comparison", "Trade-offs", "Decision"],
-                prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
+// Provide a comparison table, then test me with a hypothetical scenario asking which structure performs faster.`
+//             },
+//             {
+//                 id: 11,
+//                 title: "Edge Case & Boundary Stress Test",
+//                 desc: "Identify sneaky edge cases that break production code and pass test suites.",
+//                 tags: ["Edge Cases", "Testing", "Robustness"],
+//                 prompt: `Act as a QA Lead. I am writing code for [INSERT ALGORITHM/DATA STRUCTURE, e.g., Binary Search Tree Insertion].
 
-Compare them across:
-1. Core mechanism difference.
-2. Memory footprint comparison.
-3. Ideal use cases for Concept A vs Concept B.
-4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
+// List the 5 crucial edge cases I MUST test to ensure my code doesn't crash in production (e.g., empty input, single element, duplicates, maximum bounds, negative values).
 
-Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
-            },
-            {
-                id: 13,
-                title: "Feynman Technique (Teach-Back)",
-                desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
-                tags: ["Feynman", "Teaching", "Mastery"],
-                prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
+// Ask me to pick one edge case and write the defensive code check for it in C++, Java, or Python.`
+//             },
+//             {
+//                 id: 12,
+//                 title: "Comparative Analysis (X vs Y)",
+//                 desc: "Understand differences, trade-offs, and when to pick one tool over another.",
+//                 tags: ["Comparison", "Trade-offs", "Decision"],
+//                 prompt: `Act as a tech lead. I am confused about when to use [CONCEPT A, e.g., BFS] versus [CONCEPT B, e.g., DFS].
 
-Your role:
-1. Listen to my explanation.
-2. Call out any gaps, inaccuracies, or overly complex terms I used.
-3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
+// Compare them across:
+// 1. Core mechanism difference.
+// 2. Memory footprint comparison.
+// 3. Ideal use cases for Concept A vs Concept B.
+// 4. Language-specific standard library availability (C++ STL, Java Collections, Python modules).
 
-Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
-            },
-            {
-                id: 14,
-                title: "Progressive Difficulty Challenges",
-                desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
-                tags: ["Challenges", "Progression", "Practice"],
-                prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
+// Give me 2 real-world problem scenarios and ask me to decide which one to use for each, with justification.`
+//             },
+//             {
+//                 id: 13,
+//                 title: "Feynman Technique (Teach-Back)",
+//                 desc: "Solidify your mastery by explaining concepts back to the AI in simple terms.",
+//                 tags: ["Feynman", "Teaching", "Mastery"],
+//                 prompt: `Act as a curious high school student learning programming. I am going to explain [INSERT TOPIC, e.g., How Dynamic Programming Memoization Works] to you in my own words.
 
-Give me 3 problem descriptions in increasing difficulty:
-- Level 1: Easy (Warmup)
-- Level 2: Medium (Standard Interview)
-- Level 3: Hard (Advanced Application)
+// Your role:
+// 1. Listen to my explanation.
+// 2. Call out any gaps, inaccuracies, or overly complex terms I used.
+// 3. Ask a probing clarifying question to see if I truly grasp the underlying mechanics.
 
-Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
-            },
-            {
-                id: 15,
-                title: "Comprehensive Final Assessment",
-                desc: "Validate your complete module mastery with a realistic evaluation test.",
-                tags: ["Assessment", "Evaluation", "Final Test"],
-                prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+// Say 'I am ready! Explain [INSERT TOPIC] to me like I am 15 years old.' to start.`
+//             },
+//             {
+//                 id: 14,
+//                 title: "Progressive Difficulty Challenges",
+//                 desc: "Level up your problem-solving through Easy, Medium, and Hard variations.",
+//                 tags: ["Challenges", "Progression", "Practice"],
+//                 prompt: `Act as a coding interview coach for [INSERT TOPIC, e.g., Monotonic Stack].
 
-Provide a 3-part comprehensive assessment:
-1. Conceptual Multiple Choice (1 Question)
-2. Complexity Evaluation (1 Question)
-3. Code Implementation Task (1 Practical Problem)
+// Give me 3 problem descriptions in increasing difficulty:
+// - Level 1: Easy (Warmup)
+// - Level 2: Medium (Standard Interview)
+// - Level 3: Hard (Advanced Application)
 
-Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
-            }
+// Do NOT give code or solutions. Present Level 1 first and ask me to write pseudocode or code in my preferred language. I will submit solutions one by one.`
+//             },
+//             {
+//                 id: 15,
+//                 title: "Comprehensive Final Assessment",
+//                 desc: "Validate your complete module mastery with a realistic evaluation test.",
+//                 tags: ["Assessment", "Evaluation", "Final Test"],
+//                 prompt: `Act as a senior university professor evaluating my mastery of [INSERT MODULE/TOPIC, e.g., Trees & Graphs].
+
+// Provide a 3-part comprehensive assessment:
+// 1. Conceptual Multiple Choice (1 Question)
+// 2. Complexity Evaluation (1 Question)
+// 3. Code Implementation Task (1 Practical Problem)
+
+// Present all 3 parts at once. Ask me to reply with my answers. Once I reply, give me a detailed score breakdown and actionable feedback for areas of improvement.`
+//             }
         ];
 
         /* ==========================================================================
